@@ -82,8 +82,8 @@ const deleteUser = asyncHandler(async (req, res) => {
 const getUserInfo = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
     if (!token) {
-        return res.redirect("/");
-    } try {
+        res.send("현재 토큰없음");
+    }else try {
         const decoded = jwt.verify(token, jwtSecret);
         const userInfo = await User.findOne(decoded.id);
 
