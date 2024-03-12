@@ -30,7 +30,10 @@ app.use(
   })
 );
 
-app.use;
+
+app.use('/users',require('./routers/userRouter'));
+
+// app.use;
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 서버 실행 중 🚀`);

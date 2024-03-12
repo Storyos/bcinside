@@ -5,7 +5,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    hpassword: {
+    password: {
         type: String,
         required: true,
     },
@@ -13,24 +13,25 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
-    liked_post: {
+    liked_post: [{
         type: mongoose.Schema.Types.ObjectId,
-        default:0,
         required: false,
         ref: "User",
-    },
+    }],
     posts:[{
         type: mongoose.Schema.Types.ObjectId,
-        default: 0,
         required: false,
         ref: "User",
     }],
     blocked:[{
         type:mongoose.Schema.Types.ObjectId,
-        default:0,
         required: false,
         ref: "User"
     }]
 
 
 })
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

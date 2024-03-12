@@ -1,5 +1,5 @@
 const express = require("express");
-
+const router = express.Router();
 const {
     loginUser,
     getLogin,
@@ -8,11 +8,14 @@ const {
     deleteUser,
     getUserInfo,
     updateUserInfo,
-    logout
+    logout,
+    test
 } = require("../controllers/userController");
 
 const userRouter = express.Router();
 
+userRouter.route("/test")
+.get(test);
 
 userRouter.route("/login")
     .post(loginUser)
@@ -30,4 +33,4 @@ userRouter.route("/userInfo")
 userRouter.route("/logout")
     .get(logout);
 
-module.exports={userRouter};
+module.exports= userRouter;
