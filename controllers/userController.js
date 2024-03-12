@@ -6,6 +6,9 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 const router = express.Router();
+
+
+
 const getLogin = (req, res) => {
     res.render("home");
 }
@@ -81,40 +84,19 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @route get /userInfo
 const getUserInfo = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
-    if (!token) {
-        res.send("현재 토큰없음");
-    }else try {
-        const decoded = jwt.verify(token, jwtSecret);
-        const userInfo = await User.findOne(decoded.id);
+    const userInfo = await User.findById(req.user.id); 
+    res.render("userPage", { user: userInfo });
+});
 
-        res.render("userPage", { user: userInfo });
-
-    } catch (err) {
-        // 에러처리
-        res.status(401).json({ message: "에러" })
-    }
-    // 세션값에서 userID를 받아서 그 아이디로 필드를 찾아서 반환
-})
 
 // @desc 회원정보수정
 // @route put /userInfo
 const updateUserInfo = asyncHandler(async (req, res) => {
-    const token = req.cookies.token;
-    try {
-        const decoded = jwt.verify(token, jwtSecret);
-    } catch (err) {
-
-    }
-
-    const id = decoded.id;
-    const { username, nickname } = req.body;
-    const user = await User.findByIdAndUpdate(id);
-
-    user.username = username;
-    user.nickname = nickname;
-    // 응답필요
+    const id = req.user.id;
+    const { username, nickname } = req.body; // 수정
+    await User.findByIdAndUpdate(id, { username, nickname }); // 수정
     res.send("회원정보 Update완료");
-})
+});
 
 // @desc logout
 // @route get /logout

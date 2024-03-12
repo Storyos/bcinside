@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+const checkLogin = require("../middlewares/checkLogin");
 const {
     loginUser,
     getLogin,
@@ -26,9 +27,9 @@ userRouter.route("/register")
     .post(registerUser);
 
 userRouter.route("/userInfo")
-    .get(getUserInfo)
-    .patch(updateUserInfo)
-    .delete(deleteUser);
+    .get(checkLogin,getUserInfo)
+    .patch(checkLogin,updateUserInfo)
+    .delete(checkLogin,deleteUser);
 
 userRouter.route("/logout")
     .get(logout);
