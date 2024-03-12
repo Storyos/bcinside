@@ -16,19 +16,19 @@ const userSchema = new mongoose.Schema({
     liked_post: {
         type: mongoose.Schema.Types.ObjectId,
         default:0,
-        required: true,
+        required: false,
         ref: "User",
     },
     posts:[{
         type: mongoose.Schema.Types.ObjectId,
         default: 0,
-        required: true,
+        required: false,
         ref: "User",
     }],
     blocked:[{
         type:mongoose.Schema.Types.ObjectId,
         default:0,
-        required: true,
+        required: false,
         ref: "User"
     }]
 
