@@ -3,9 +3,9 @@ const MethodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const mongoStore = require("connect-mongo");
-const dotenv = require("dotenv");
 const dbConnect = require("./config/dbConnect");
-const { postRouter } = require("./routers/postRouter");
+const postRouter = require("./routers/postRouter");
+const rootRouter = require("./routers/rootRouter");
 
 const app = express();
 const port = 3000;
@@ -30,7 +30,8 @@ app.use(
   })
 );
 
-app.use;
+app.use("/", rootRouter);
+app.use("/post", postRouter);
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 서버 실행 중 🚀`);
