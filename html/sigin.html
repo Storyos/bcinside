@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign-In Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #fff;
+        }
+        .navbar .logo, .navbar .menu, .navbar .auth-buttons {
+            display: flex;
+            align-items: center;
+        }
+        .navbar .menu-item {
+            margin: 0 0.5rem;
+        }
+        .navbar input[type="search"] {
+            padding: 0.5rem;
+            margin-left: 1rem;
+        }
+        .auth-buttons button {
+            padding: 0.5rem 1rem;
+            margin-left: 0.5rem;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .signin-form {
+            width: 300px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #fff;
+            border: 1px solid #ddd;
+        }
+        .signin-form input {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid #ddd;
+        }
+        .signin-form button {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #5cb85c;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .signin-form button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="logo">Logo</div>
+    <div class="menu">
+        <div class="menu-item">1</div>
+        <div class="menu-item">2</div>
+        <div class="menu-item">3</div>
+        <div class="menu-item">4</div>
+        <div class="menu-item">5</div>
+    </div>
+    <div>
+        <input type="search" placeholder="Search the community">
+    </div>
+    <div class="auth-buttons">
+        <button>Login</button>
+        <button>Signin</button>
+    </div>
+</nav>
+
+<div class="signin-form">
+    <form>
+        <input type="text" placeholder="Name" name="name" required>
+        <input type="text" placeholder="ID" name="username" required>
+        <input type="password" placeholder="Password" name="password" required>
+        <button type="submit">Signin</button>
+    </form>
+</div>
+
+</body>
+</html>

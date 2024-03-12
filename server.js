@@ -30,6 +30,7 @@ app.use(
   })
 );
 
+app.use('/users',require('./routers/userRouter'));
 app.use("/", rootRouter);
 app.use("/post", postRouter);
 
