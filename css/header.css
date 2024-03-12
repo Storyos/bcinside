@@ -37,35 +37,3 @@
     max-width: 300px;
     padding: 0.5rem;
   }
-
-  .account-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-  }
-
-  .account-container button {
-    padding: 0.5rem 1rem;
-  }
-
-  .main-content {
-    display: flex;
-    padding: 1rem;
-  }
-
-  .content {
-    width: 70%;
-    padding-right: 1rem;
-  }
-
-  .sidebar {
-    width: 30%;
-    padding-left: 1rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f3f3f3;
-  }

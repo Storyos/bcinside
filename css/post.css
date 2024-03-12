@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f3f3f3;
+  }
+
+  .logo {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5rem;
+  }
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  .post-container {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 10px;
+  }
+  .post-title {
+    margin-bottom: 20px;
+  }
+  .post-content {
+    border: 1px solid #ccc;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .like-button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  .like-counter {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .action-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  .comment-section {
+    margin-top: 20px;
+  }
+  .comment-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  .submit-comment {
+    padding: 10px 20px;
+    width: 100%;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
