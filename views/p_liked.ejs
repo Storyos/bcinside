@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>내가 좋아요한 게시물 목록</h1>
+<div>
+    <ul>
+        <% user.liked_post.forEach(postId=> { %>
+            <% let post=posts.find(post=> post._id.toString() === postId.toString()); %>
+                <li><%= post.title %></li>
+                <% }); %>
+    </ul>
+</div>
+</body>
+</html>
