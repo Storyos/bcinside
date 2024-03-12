@@ -21,7 +21,7 @@ const loginUser = asyncHandler(async (req, res) => {
     if (!isMatch) {
         return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
     }
-    const token = jwt.sign({ id: user._id }, jwtSecret);
+    const token = jwt.sign({ id: user.id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
     res.redirect("/contacts");
 })
@@ -60,8 +60,15 @@ const registerUser = asyncHandler(async (req, res) => {
 
 // @desc Delete User (회원 탈퇴)
 const deleteUser = asyncHandler(async (req, res) => {
-    const id = req.params.id;
-    await User.findByIdAndDelete(id);
+    const token = req.cookies.token;
+    try{
+        const decoded = jwt.verify(token, jwtSecret);
+        const id = decoded.id;
+        await User.findByIdAndDelete(id);
+    }catch (err){
+        
+    }
+    res.clearCookie("token");
     res.redirect("/");
     // DB에서 cookie ID 삭제
     // Redirect로 Logout 처리
@@ -75,7 +82,10 @@ const getUserInfo = asyncHandler(async (req, res) => {
         return res.redirect("/");
     } try {
         const decoded = jwt.verify(token, jwtSecret);
-        // res.render("userPage",decoded);
+        const userInfo = await User.findOne(decoded.id);
+
+        res.render("userPage",{user : userInfo});
+
     } catch (err) {
         // 에러처리
         res.status(401).json({ message: "에러" })
@@ -86,9 +96,14 @@ const getUserInfo = asyncHandler(async (req, res) => {
 // @desc 회원정보수정
 // @route put /userInfo
 const updateUserInfo = asyncHandler(async (req, res) => {
-    // 이것도 세션값 받아서 하면될것같은데
-    const id = req.params.id;
+    const token = req.cookies.token;
+    try{
+        const decoded = jwt.verify(token,jwtSecret);
+    } catch(err){
 
+    }
+
+    const id = decoded.id;
     const { username, nickname } = req.body;
     const user = await User.findByIdAndUpdate(id);
 

@@ -13,6 +13,7 @@ const {
 
 const userRouter = express.Router();
 
+
 userRouter.route("/login")
     .post(loginUser)
     .get(getLogin);
@@ -28,3 +29,5 @@ userRouter.route("/userInfo")
 
 userRouter.route("/logout")
     .get(logout);
+
+module.exports={userRouter};
