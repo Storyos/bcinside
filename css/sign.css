@@ -38,34 +38,34 @@
     padding: 0.5rem;
   }
 
-  .account-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f7f7f7;
+}
+
+.signin-form {
+    width: 300px;
+    margin: 2rem auto;
     padding: 1rem;
-  }
-
-  .account-container button {
-    padding: 0.5rem 1rem;
-  }
-
-  .main-content {
-    display: flex;
-    padding: 1rem;
-  }
-
-  .content {
-    width: 70%;
-    padding-right: 1rem;
-  }
-
-  .sidebar {
-    width: 30%;
-    padding-left: 1rem;
-  }
-
-  footer {
-    text-align: center;
-    padding: 1rem;
-    background-color: #f3f3f3;
-  }
+    background: #fff;
+    border: 1px solid #ddd;
+}
+.signin-form input {
+    width: 100%;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ddd;
+}
+.signin-form button {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+.signin-form button:hover {
+    opacity: 0.9;
+}
