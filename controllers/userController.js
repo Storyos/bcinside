@@ -4,8 +4,8 @@ const bcrypt = require("bcrypt")
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
-const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
 const axios = require('axios');
 const getLogin = (req, res) => {
     res.render("home");
@@ -83,7 +83,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
         return res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
     // 경로 설정 필요
-    res.render("userPage", { user: userInfo });
+    res.render("account", { user: userInfo });
 });
 
 
