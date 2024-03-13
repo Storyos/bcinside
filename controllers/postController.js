@@ -7,7 +7,7 @@ const getPosts = async (req, res) => {
   const posts = await Post.find();
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  res.render("posts", posts);
+  res.render("include/header", posts);
 };
 
 const getPost = async (req, res) => {
