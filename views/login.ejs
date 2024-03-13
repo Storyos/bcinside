@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../public/css/sign.css" />
-    <title>Sign-In Page</title>
+    <link rel="stylesheet" href="css/login.css" />
+    <title>Login Page</title>
   </head>
   <body>
     <header>
@@ -27,18 +27,24 @@
         <button>Signin</button>
       </div>
     </header>
-    <div class="signin-form">
-      <form>
-        <input type="text" placeholder="Name" name="name" required />
-        <input type="text" placeholder="ID" name="username" required />
-        <input
-          type="password"
-          placeholder="Password"
-          name="password"
-          required
-        />
-        <button type="submit">Signin</button>
-      </form>
-    </div>
+    <!-- <div class="header">
+    <div class="logo">Logo</div>
+    <ul class="menu">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li><input type="search" placeholder="Search the community"></li>
+        <li><button>Login</button></li>
+        <li><button>Signin</button></li>
+    </ul>
+</div> -->
+
+    <form class="login-form">
+      <input type="text" placeholder="ID" required />
+      <input type="password" placeholder="password" required />
+      <button type="submit">login</button>
+    </form>
   </body>
 </html>

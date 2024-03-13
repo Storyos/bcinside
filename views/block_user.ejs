@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/main.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="container">
-        <nav></nav>
-        <div class="search">1</div>
-        <div class="myAccount">1</div>
-        <div class="post">2</div>
+    <h1>내가 차단한 유저 목록</h1>
+    <div>
+        <ul>
+            <% blockedUsers.forEach(user => { %>
+                <li><%= user.nickname %></li>
+            <% }); %>
+        </ul>
     </div>
 </body>
 </html>

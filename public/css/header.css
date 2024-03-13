@@ -1,0 +1,39 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #f3f3f3;
+  }
+
+  .logo {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .menu {
+    display: flex;
+    align-items: center;
+  }
+
+  .menu button {
+    margin-left: 1rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .search-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .search-container input {
+    width: 100%;
+    max-width: 300px;
+    padding: 0.5rem;
+  }
