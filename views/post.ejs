@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/post.css">
-<title>Post Update Page</title>
-</head>
-<body>
-  <header>
-    <div class="logo">Logo</div>
-    <nav class="menu">
-      <button>1조</button>
-      <button>2조</button>
-      <button>3조</button>
-      <button>4조</button>
-      <button>5조</button>
-  
-      <div class="search-container">
-          <form method="get">
-            <input type="search" placeholder="검색">
-          </form>
-        </div>      
-    </nav>
-    <div class="account-container">
-      <button>Login</button>
-      <button>Signin</button>
-    </div>
-  </header>
-<div class="post-container">
-  <div class="post-title">
-    <input type="text" value="제목" readonly>
-  </div>
-  <div class="post-content">
-    내용
-  </div>
-  <div class="action-buttons">
-    <button class="like-button">
-    </button>
-    <span class="like-counter">0</span>
-    <button>수정</button>
-    <button>삭제</button>
-  </div>
-  <div class="comment-section">
-    <input type="text" class="comment-input" placeholder="댓글 달기...">
-    <button class="submit-comment">등록</button>
-  </div>
-</div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/css/post.css" />
+    <title>Post Update Page</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Logo</div>
+      <nav class="menu">
+        <button>1조</button>
+        <button>2조</button>
+        <button>3조</button>
+        <button>4조</button>
+        <button>5조</button>
 
-<!-- <script>
+        <div class="search-container">
+          <form method="get">
+            <input type="search" placeholder="검색" />
+          </form>
+        </div>
+      </nav>
+      <div class="account-container">
+        <button>Login</button>
+        <button>Signin</button>
+      </div>
+    </header>
+    <div class="post-container">
+      <div class="post-title">
+        <input type="text" value="제목" readonly />
+      </div>
+      <div class="post-content">내용</div>
+      <div class="action-buttons">
+        <button class="like-button"></button>
+        <span class="like-counter">0</span>
+        <button>수정</button>
+        <button>삭제</button>
+      </div>
+      <div class="comment-section">
+        <input type="text" class="comment-input" placeholder="댓글 달기..." />
+        <button class="submit-comment">등록</button>
+      </div>
+    </div>
+
+    <!-- <script>
 // Example JavaScript to handle like button click
 document.querySelector('.like-button').addEventListener('click', function() {
   // Increment the like counter
@@ -55,6 +52,5 @@ document.querySelector('.like-button').addEventListener('click', function() {
   likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
 });
 </script> -->
-
-</body>
+  </body>
 </html>

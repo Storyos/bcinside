@@ -25,7 +25,7 @@ const getPost = async (req, res) => {
 };
 
 const getMakePost = (req, res) => {
-  res.status(200).render("makePost");
+  res.status(200).render("post_write");
 };
 
 const postMakePost = async (req, res) => {
@@ -59,7 +59,7 @@ const getUpdatePost = async (req, res) => {
   const post = await Post.findById(id);
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  return res.status(201).render("updatePost", post);
+  return res.status(201).render("post-update", post);
 };
 
 const postUpdatePost = async (req, res) => {
