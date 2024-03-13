@@ -4,6 +4,8 @@ const bcrypt = require("bcrypt")
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 const axios = require('axios');
 const getLogin = (req, res) => {
     res.render("home");
@@ -80,6 +82,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
     if (!userInfo) {
         return res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
+    // 경로 설정 필요
     res.render("userPage", { user: userInfo });
 });
 
@@ -112,8 +115,6 @@ const logout = asyncHandler((req, res) => {
 // Google OAUTH 관련 
 // 
 // 
-const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
-const GOOGLE_CLIENT_SECRET = "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";
 const GOOGLE_REDIRECT_URI = "http://localhost:3000/users/googleLogin/redirect";
 const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
 
@@ -158,10 +159,8 @@ const googleredirect = asyncHandler(async (req, res) => {
             password: resp2.data.id
         });
     }
-    console.log(user);
     const token = jwt.sign({ id: user._id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
-    console.log(resp2.data);
     // DATA와 함께 넘겨줘야함
     res.redirect("/");
 });
