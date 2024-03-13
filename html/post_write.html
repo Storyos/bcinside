@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="../css/post_write.css">
-<title>Form Example</title>
-</head>
-<body>
-  <header>
-        
-    <div class="logo">Logo</div>
-    <nav class="menu">
-      <button>1조</button>
-      <button>2조</button>
-      <button>3조</button>
-      <button>4조</button>
-      <button>5조</button>
-  
-      <div class="search-container">
-          <form method="get">
-            <input type="search" placeholder="검색">
-          </form>
-        </div>      
-    </nav>
-    <div class="account-container">
-      <button>Login</button>
-      <button>Signin</button>
-    </div>
-  </header>
-<form action="#" method="post">
-  <input type="text" id="name" name="name" placeholder="제목">
-  <div class="radio-group">
-    <label><input type="radio" name="rating" value="1">1조</label>
-    <label><input type="radio" name="rating" value="2">2조</label>
-    <label><input type="radio" name="rating" value="3">3조</label>
-    <label><input type="radio" name="rating" value="4">4조</label>
-    <label><input type="radio" name="rating" value="5">5조</label>
-  </div>
-  <textarea id="comment" name="comment" rows="4" placeholder="내용 입력"></textarea>
-  <input type="submit" value="제출">
-</form>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/css/post_write.css" />
+    <title>Form Example</title>
+  </head>
+  <body>
+    <header>
+      <div class="logo">Logo</div>
+      <nav class="menu">
+        <button>1조</button>
+        <button>2조</button>
+        <button>3조</button>
+        <button>4조</button>
+        <button>5조</button>
 
-</body>
+        <div class="search-container">
+          <form method="get">
+            <input type="search" placeholder="검색" />
+          </form>
+        </div>
+      </nav>
+      <div class="account-container">
+        <button>Login</button>
+        <button>Signin</button>
+      </div>
+    </header>
+    <form action="#" method="post">
+      <input type="text" id="name" name="name" placeholder="제목" />
+      <div class="radio-group">
+        <label><input type="radio" name="rating" value="1" />1조</label>
+        <label><input type="radio" name="rating" value="2" />2조</label>
+        <label><input type="radio" name="rating" value="3" />3조</label>
+        <label><input type="radio" name="rating" value="4" />4조</label>
+        <label><input type="radio" name="rating" value="5" />5조</label>
+      </div>
+      <textarea
+        id="comment"
+        name="comment"
+        rows="4"
+        placeholder="내용 입력"
+      ></textarea>
+      <input type="submit" value="제출" />
+    </form>
+  </body>
 </html>
