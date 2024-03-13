@@ -1,39 +1,74 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+.main-header button {
+  border: none;
+  background-color: rgba(0, 0, 0, 0);
+}
 
-  header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: #f3f3f3;
-  }
+.main-header button:hover {
+  cursor: pointer;
+}
 
-  .logo {
-    font-size: 2rem;
-    font-weight: bold;
-  }
+.main-header {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
 
-  .menu {
-    display: flex;
-    align-items: center;
-  }
+.main-header nav {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin: 10px 0;
+}
 
-  .menu button {
-    margin-left: 1rem;
-    padding: 0.5rem 1rem;
-  }
+.header-search {
+  border: 5px solid #3b488f;
+  font-size: 20px;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 0 10px;
+  width: 100%;
+}
 
-  .search-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-  }
+.header-search-container {
+  position: relative;
+  width: 50%;
+}
 
-  .search-container input {
-    width: 100%;
-    max-width: 300px;
-    padding: 0.5rem;
-  }
+.header-search-btn {
+  position: absolute;
+  font-size: 20px;
+  right: 5px;
+  top: 15px;
+}
+
+.account-container {
+  right: 15px;
+  position: absolute;
+}
+
+.account-container button {
+  font-size: 18px;
+  margin:0 5px;
+}
+
+.main-nav2 {
+  background-color: #3b488f;
+  padding: 8px;
+}
+
+.main-nav2 button {
+  color: white;
+  font-size: 23px;
+  margin: 0 10px;
+}
+
+.header-logo {
+  width: 20%;
+  position: relative;
+  min-width: 200px;
+  margin: 0 10px;
+}
+
+.header-logo img {
+  width: 100%;
+}
