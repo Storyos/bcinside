@@ -1,85 +1,45 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  header {
-    display: flex;
-    justify-content: space-between;
-    padding: 1rem;
-    background-color: #f3f3f3;
-  }
-  
-  .logo {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .menu {
-    display: flex;
-    align-items: center;
-  }
-  
-  .menu button {
-    margin-left: 1rem;
-    padding: 0.5rem 1rem;
-  }
-  
-  .search-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-  }
-  
-  .search-container input {
-    width: 100%;
-    max-width: 300px;
-    padding: 0.5rem;
-  }
-  
-  /* Reset margins and paddings */
-  body, html {
-    margin: 0;
-    padding: 0;
-    height: 100%; /* Make sure the body takes full viewport height */
-    width: 100%; /* Make sure the body takes full viewport width */
-  }
-  
-  /* Adjust the form to be more responsive */
-  form {
-    width: 100%; /* Form takes full width of the viewport */
-    max-width: none; /* Remove max-width restriction */
-  }
-  
-  input[type="text"],
-  textarea {
-    width: calc(100% - 20px); /* Adjust width taking padding into account */
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-  }
-  
-  .radio-group {
-    margin: 10px 0;
-  }
-  
-  input[type="radio"] {
-    margin-right: 5px;
-  }
-  
-  input[type="submit"] {
-    width: calc(100% - 20px); /* Match the width of text inputs and textarea */
-    padding: 10px;
-    margin-top: 10px;
-    border: 1px solid #ccc;
-    background-color: #4CAF50;
-    color: white;
-    cursor: pointer;
-  }
-  
-  input[type="submit"]:hover {
-    opacity: 0.8;
-  }
-  
+/* Reset margins and paddings */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%; /* Make sure the body takes full viewport height */
+  width: 100%; /* Make sure the body takes full viewport width */
+}
+
+/* Adjust the form to be more responsive */
+form {
+  width: 100%; /* Form takes full width of the viewport */
+  max-width: none; /* Remove max-width restriction */
+}
+
+input[type="text"],
+textarea {
+  width: calc(100% - 20px); /* Adjust width taking padding into account */
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.radio-group {
+  margin: 10px 0;
+}
+
+input[type="radio"] {
+  margin-right: 5px;
+}
+
+input[type="submit"] {
+  width: calc(100% - 20px); /* Match the width of text inputs and textarea */
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  opacity: 0.8;
+}
