@@ -1,7 +1,9 @@
 const express = require("express");
-const router = express.Router();
 const checkLogin = require("../middlewares/checkLogin");
+const userRouter = express.Router();
 const {
+    googleLogin,
+    googleredirect,
     loginUser,
     getLogin,
     getRegister,
@@ -13,14 +15,16 @@ const {
     test
 } = require("../controllers/userController");
 
-const userRouter = express.Router();
-
-userRouter.route("/test")
-.get(test);
 
 userRouter.route("/login")
     .post(loginUser)
     .get(getLogin);
+
+userRouter.route("/googleLogin")
+    .get(googleLogin)
+
+userRouter.route("/googleLogin/redirect")
+    .get(googleredirect);
 
 userRouter.route("/register")
     .get(getRegister)

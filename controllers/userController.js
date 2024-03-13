@@ -1,14 +1,10 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
 const bcrypt = require("bcrypt")
-const express = require("express");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
-const router = express.Router();
-
-
-
+const axios = require('axios');
 const getLogin = (req, res) => {
     res.render("home");
 }
@@ -27,7 +23,7 @@ const loginUser = asyncHandler(async (req, res) => {
     }
     const token = jwt.sign({ id: user.id }, jwtSecret);
     res.cookie("token", token, { httpOnly: true });
-    res.redirect("/contacts");
+    res.redirect("/");
 })
 
 
@@ -45,20 +41,17 @@ const registerUser = asyncHandler(async (req, res) => {
     // ID 중복검사 Logic
     const users = await User.findOne({ username });
     if (users) {
-        res.send("이미 존재하는 회원아이디입니다.")
+        return res.send("이미 존재하는 회원아이디입니다.")
     }
-
     // Password 조건검사 Logic
     if (password.length > 12) {
-        res.send("비밀번호 너무 김")
+        return res.send("비밀번호 너무 김")
     } else if (password.length < 8) {
-        res.send("비밀번호 너무 짧음");
+        return res.send("비밀번호 너무 짧음");
     }
     else {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ username, password: hashedPassword, nickname });
-
-
+        const user = await User.create({ username : username, password: hashedPassword, nickname :nickname });
         // 회원가입까지는 가능 --> 이후 처리 필요
         res.status(201).json({ message: "등록성공", user })
     }
@@ -72,7 +65,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         const id = decoded.id;
         await User.findByIdAndDelete(id);
     } catch (err) {
-
+        return res.status(401).json({ message: "토큰 오류" });
     }
     res.clearCookie("token");
     res.redirect("/");
@@ -83,8 +76,10 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @desc MyPage
 // @route get /userInfo
 const getUserInfo = asyncHandler(async (req, res) => {
-    const token = req.cookies.token;
-    const userInfo = await User.findById(req.user.id); 
+    const userInfo = await User.findById(req.user.id);
+    if (!userInfo) {
+        return res.status(401).json({ message: "사용자 정보가 없습니다." });
+    }
     res.render("userPage", { user: userInfo });
 });
 
@@ -93,10 +88,18 @@ const getUserInfo = asyncHandler(async (req, res) => {
 // @route put /userInfo
 const updateUserInfo = asyncHandler(async (req, res) => {
     const id = req.user.id;
-    const { username, nickname } = req.body; // 수정
-    await User.findByIdAndUpdate(id, { username, nickname }); // 수정
-    res.send("회원정보 Update완료");
+    const { username, nickname } = req.body;
+    const existingUser = await User.findOne({ username });
+    if (existingUser && existingUser.id !== id) {
+        return res.send("이미 존재하는 사용자 이름입니다.");
+    }
+    await User.findByIdAndUpdate(id, { username, nickname });
+    const updatedUser = await User.findById(id);
+    res.json({ message: "회원정보가 업데이트되었습니다.", user: updatedUser });
 });
+const test = (req, res) => {
+    res.redirect("https://www.naver.com");
+}
 
 // @desc logout
 // @route get /logout
@@ -105,10 +108,73 @@ const logout = asyncHandler((req, res) => {
     res.redirect("/");
 })
 
-const test = (req, res) => {
-    res.redirect("https://www.naver.com");
-}
+
+// Google OAUTH 관련 
+// 
+// 
+const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
+const GOOGLE_CLIENT_SECRET = "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";
+const GOOGLE_REDIRECT_URI = "http://localhost:3000/users/googleLogin/redirect";
+const GOOGLE_TOKEN_URL = "https://oauth2.googleapis.com/token";
+
+// 구글 토큰으로 email, google id 등을 가져오기 위한 url
+const GOOGLE_USERINFO_URL = 'https://www.googleapis.com/oauth2/v2/userinfo';
+
+const googleLogin = (req, res) => {
+    let url = "https://accounts.google.com/o/oauth2/v2/auth";
+    url += `?client_id=${GOOGLE_CLIENT_ID}`;
+    url += `&redirect_uri=${GOOGLE_REDIRECT_URI}`;
+    url += '&response_type=code';
+    url += '&scope=email profile';
+    res.redirect(url);
+};
+
+const googleredirect = asyncHandler(async (req, res) => {
+    const { code } = req.query;
+    console.log('code :>> ', code);
+
+    const resp = await axios.post(GOOGLE_TOKEN_URL, {
+        code,
+        client_id: GOOGLE_CLIENT_ID,
+        client_secret: GOOGLE_CLIENT_SECRET,
+        redirect_uri: GOOGLE_REDIRECT_URI,
+        grant_type: 'authorization_code',
+    });
+
+    // 토큰으로 google 계정 정보 가져오기
+    const resp2 = await axios.get(GOOGLE_USERINFO_URL, {
+        // Request Header에 Authorization 추가
+        headers: {
+            Authorization: `Bearer ${resp.data.access_token}`,
+        },
+    });
+    
+    let user = await User.findOne({ username: resp2.data.id });
+    if (!user) {
+        // Google 정보를 사용하여 새 사용자 생성
+        user = await User.create({ 
+            username: resp2.data.id, 
+            nickname: resp2.data.name,
+            password: resp2.data.id
+        });
+    }
+    console.log(user);
+    const token = jwt.sign({ id: user._id }, jwtSecret);
+    res.cookie("token", token, { httpOnly: true });
+    console.log(resp2.data);
+    // DATA와 함께 넘겨줘야함
+    res.redirect("/");
+});
+
+
+
+
+
+
+
 module.exports = {
+    googleLogin,
+    googleredirect,
     loginUser,
     getLogin,
     getRegister,
@@ -117,5 +183,4 @@ module.exports = {
     getUserInfo,
     updateUserInfo,
     logout,
-    test
 };

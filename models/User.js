@@ -7,7 +7,8 @@ const userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true,
+        default:"",
+        required: false,
     },
     nickname: {
         type: String,
@@ -16,12 +17,12 @@ const userSchema = new mongoose.Schema({
     liked_post: [{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
-        ref: "User",
+        ref: "Post",
     }],
     posts:[{
         type: mongoose.Schema.Types.ObjectId,
         required: false,
-        ref: "User",
+        ref: "Post",
     }],
     blocked:[{
         type:mongoose.Schema.Types.ObjectId,
