@@ -7,8 +7,10 @@ const jwtSecret = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_SECRET = "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";
 const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
 const axios = require('axios');
+
+
 const getLogin = (req, res) => {
-    res.render("home");
+    res.render("login");
 }
 
 // @desc Login User

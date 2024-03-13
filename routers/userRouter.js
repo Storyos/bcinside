@@ -12,7 +12,6 @@ const {
     getUserInfo,
     updateUserInfo,
     logout,
-    test
 } = require("../controllers/userController");
 
 
@@ -26,7 +25,7 @@ userRouter.route("/googleLogin")
 userRouter.route("/googleLogin/redirect")
     .get(googleredirect);
 
-userRouter.route("/register")
+userRouter.route("/signUp")
     .get(getRegister)
     .post(registerUser);
 
