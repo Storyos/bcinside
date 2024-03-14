@@ -1,0 +1,125 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 1000px;
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70vh;
+}
+
+.content {
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.middle-wrapper,
+.bottom-wrapper {
+    padding: 20px;
+}
+
+.middle {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.info,
+.info2 {
+    width: calc(50% - 10px);
+    padding: 15px;
+    border: 2px solid #333;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+.info_group {
+    margin-bottom: 10px;
+}
+.info li{
+    margin-bottom: 10px;
+}
+
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-top: 1px solid #c2c2c2;
+    border-bottom: 2px solid #333;
+}
+
+.myButton {
+    width: 600px;
+	box-shadow: 0px 0px 0px 2px #9fb4f2;
+	background:linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+	background-color:#7892c2;
+	border-radius:10px;
+	border:1px solid #4e6096;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:19px;
+	padding:4px 76px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #283966;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+.myButton:hover {
+	background:linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+	background-color:#476e9e;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+.myButton-d {
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 100px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+    
+}
+.myButton-d:hover {
+	background-color:#eb675e;
+}
+.myButton-d:active {
+	position:relative;
+	top:1px;
+}
+
+
+.block_user,
+.block_admin,
+.withdraw {
+    margin: 10px 0;
+    
+}
+

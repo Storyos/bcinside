@@ -1,0 +1,10 @@
+<%- include("./include/header") %>
+<h1>최신 게시글</h1>
+<div>
+  <ul>
+    <% posts.forEach(post => { %>
+    <li><%= post.title %></li>
+    <% }); %>
+  </ul>
+</div>
+<%- include("./include/footer") %>

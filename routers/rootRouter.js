@@ -1,12 +1,9 @@
 const express = require("express");
 
-const {} = require("../controllers/postController");
+const { getIndex } = require("../controllers/postController");
 
 const rootRouter = express.Router();
 
-rootRouter.route("/").get((req, res) => {
-  console.log(req.cookies)
-  res.status(400).render("index");
-});
+rootRouter.route("/").get(getIndex);
 
 module.exports = rootRouter;
