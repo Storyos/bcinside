@@ -45,11 +45,13 @@ const getRegister = (req, res) => {
 const registerUser = asyncHandler(async (req, res) => {
     const { username, password, nickname } = req.body;
     // ID 중복검사 Logic
-    const users = await User.findOne({ username });
+    console.log('username :>> ', username);
+    const users = await User.findOne({username:username });
     if (users) {
         return res.send("이미 존재하는 회원아이디입니다.")
     }
     // Password 조건검사 Logic
+    console.log('password :>> ', password);
     if (password.length > 12) {
         return res.send("비밀번호 너무 김")
     } else if (password.length < 8) {
