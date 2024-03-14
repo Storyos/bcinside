@@ -2,12 +2,29 @@ const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
 
-const getPosts = async (req, res) => {
+const getIndex = async (req, res) => {
   // 모든 게시글을 받아옴
   const posts = await Post.find();
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  res.render("include/header", posts);
+  res.status(200).render("index", posts);
+};
+
+const getAllPosts = async (req, res) => {
+  // 모든 게시글을 받아옴
+  const posts = await Post.find();
+  if (!posts)
+    return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
+  res.status(200).render("index", posts);
+};
+
+const getCategory = async (req, res) => {
+  // 게시판이 같은 게시글을 받아옴
+  const { category } = req.body;
+  const posts = await Post.find({ category });
+  if (!posts)
+    return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
+  res.status(200).render("posts", posts);
 };
 
 const getPost = async (req, res) => {
@@ -100,11 +117,13 @@ const deletePost = async (req, res) => {
 };
 
 module.exports = {
-  getPosts,
   getPost,
   getMakePost,
   postMakePost,
   deletePost,
   postUpdatePost,
   getUpdatePost,
+  getIndex,
+  getCategory,
+  getAllPosts,
 };
