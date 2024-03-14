@@ -30,9 +30,18 @@ app.use(
   })
 );
 
+// 토큰 전달 미들웨어 적용
+app.use((req, res, next) => {
+  res.locals.token = req.cookies.token || null;
+  next();
+});
+
+
 app.use("/users", require("./routers/userRouter"));
 app.use("/", rootRouter);
 app.use("/posts", postRouter);
+
+
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 서버 실행 중 🚀`);
