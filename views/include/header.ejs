@@ -3,15 +3,15 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/styles.css" />
-    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="shortcut icon" href="/images/logo.png" type="image/x-icon" />
     <title>BC INSIDE</title>
   </head>
   <body>
     <header class="main-header">
       <nav class="main-nav1">
         <button class="header-logo">
-          <a href="/"><img src="images/logo-full.png" alt="BC INSIDE" /></a>
+          <a href="/"><img src="/images/logo-full.png" alt="BC INSIDE" /></a>
         </button>
         <div class="header-search-container">
           <form action="/posts/search" method="GET">
@@ -27,8 +27,13 @@
           </form>
         </div>
         <div class="account-container">
+          <% if(token == 0){ %>
           <a href="/login"><button>로그인</button></a>
           <a href="/sign-in"><button>회원가입</button></a>
+          <% } else { %>
+          <a href="/users/account"><button>내 정보</button></a>
+          <a href="/users/sign-out"><button>로그아웃</button></a>
+          <% } %>
         </div>
       </nav>
       <nav class="main-nav2">
@@ -39,3 +44,5 @@
         <a href="posts/5"><button>5조</button></a>
       </nav>
     </header>
+  </body>
+</html>
