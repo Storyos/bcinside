@@ -13,9 +13,10 @@
     </ul>
 </div> -->
 
-    <form class="login-form">
-      <input type="text" placeholder="ID" required />
-      <input type="password" placeholder="password" required />
-      <button type="submit">login</button>
+    <form method="post" class="login-form">
+        <input type="text" id="ID" name="ID" placeholder="ID" required />
+        <input type="password" id="password" name="password" placeholder="password" required />
+        <button type="submit">login</button>
+        <a href="./googleLogin"><img src="/images/googleLogin.png" alt="구글로그인"></a>
     </form>
     <%- include("./include/footer") %>
