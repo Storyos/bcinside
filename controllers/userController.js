@@ -7,8 +7,10 @@ const jwtSecret = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_SECRET = "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";
 const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
 const axios = require('axios');
+
+
 const getLogin = (req, res) => {
-    res.render("home");
+    res.render("login");
 }
 
 // @desc Login User
@@ -78,11 +80,18 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @desc MyPage
 // @route get /userInfo
 const getUserInfo = asyncHandler(async (req, res) => {
-    const userInfo = await User.findById(req.user.id);
+
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, jwtSecret);
+    const id = decoded.id;
+    const userInfo = await User.findById(id);
+    console.log('userInfo :>> ', userInfo);
     if (!userInfo) {
-        return res.status(401).json({ message: "사용자 정보가 없습니다." });
+        res.send("사용자 정보가 없습니다.");
+        // res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
     // 경로 설정 필요
+    console.log('userInfo.nickname :>> ', userInfo.nickname);
     res.render("account", { user: userInfo });
 });
 
