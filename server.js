@@ -1,11 +1,12 @@
 const express = require("express");
 const MethodOverride = require("method-override");
 const cookieParser = require("cookie-parser");
-const session = require("express-session");
+// const session = require("express-session");
 const mongoStore = require("connect-mongo");
 const dbConnect = require("./config/dbConnect");
 const postRouter = require("./routers/postRouter");
 const rootRouter = require("./routers/rootRouter");
+const isLoggedIn = require("./middlewares/isLoggedIn");
 
 const app = express();
 const port = 3000;
@@ -20,16 +21,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(MethodOverride("_method"));
 app.use(cookieParser());
-app.use(
-  session({
-    secret: process.env.COOKIE_SECRET,
-    resave: false,
-    saveUninitialized: true,
-    store: mongoStore.create({ mongoUrl: process.env.DB_URL }),
-    cookie: { maxAge: dayTime },
-  })
-);
+// app.use(
+//   session({
+//     secret: process.env.COOKIE_SECRET,
+//     resave: false,
+//     saveUninitialized: true,
+//     store: mongoStore.create({ mongoUrl: process.env.DB_URL }),
+//     cookie: { maxAge: dayTime },
+//   })
+// );
 
+app.use(isLoggedIn);
 app.use("/users", require("./routers/userRouter"));
 app.use("/", rootRouter);
 app.use("/posts", postRouter);
