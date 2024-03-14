@@ -30,7 +30,7 @@ userRouter.route("/signUp")
     .post(registerUser);
 
 userRouter.route("/userInfo")
-    .get(checkLogin,getUserInfo)
+    .get(getUserInfo)
     .patch(checkLogin,updateUserInfo)
     .delete(checkLogin,deleteUser);
 
