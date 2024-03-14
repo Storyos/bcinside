@@ -7,15 +7,19 @@ const jwtSecret = process.env.JWT_SECRET;
 const GOOGLE_CLIENT_SECRET = "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";
 const GOOGLE_CLIENT_ID = "757443114508-8fjkol869pqnhsmubv2jvehdemiib3r0.apps.googleusercontent.com";
 const axios = require('axios');
+
+
 const getLogin = (req, res) => {
-    res.render("home");
+    res.render("login");
 }
 
 // @desc Login User
 // @route POST (뭘로 할까)
 const loginUser = asyncHandler(async (req, res) => {
-    const { username, password } = req.body;
-    const user = await User.findOne({ username });
+    const { ID, password } = req.body;
+    console.log('username :>> ', ID);
+    console.log('password :>> ', password);
+    const user = await User.findOne({ username: ID });
     if (!user) {
         return res.status(401).json({ message: "일치하는 사용자가 없습니다." });
     }
@@ -30,22 +34,24 @@ const loginUser = asyncHandler(async (req, res) => {
 
 
 // @desc Get Register Page
-// @route Get /register
+// @route Get /signUp
 const getRegister = (req, res) => {
     res.render("register");
 }
 
 
 // @desc Register User
-// @route Post /register
+// @route Post /signUp
 const registerUser = asyncHandler(async (req, res) => {
     const { username, password, nickname } = req.body;
     // ID 중복검사 Logic
-    const users = await User.findOne({ username });
+    console.log('username :>> ', username);
+    const users = await User.findOne({username:username });
     if (users) {
         return res.send("이미 존재하는 회원아이디입니다.")
     }
     // Password 조건검사 Logic
+    console.log('password :>> ', password);
     if (password.length > 12) {
         return res.send("비밀번호 너무 김")
     } else if (password.length < 8) {
@@ -53,7 +59,7 @@ const registerUser = asyncHandler(async (req, res) => {
     }
     else {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const user = await User.create({ username : username, password: hashedPassword, nickname :nickname });
+        const user = await User.create({ username: username, password: hashedPassword, nickname: nickname });
         // 회원가입까지는 가능 --> 이후 처리 필요
         res.status(201).json({ message: "등록성공", user })
     }
@@ -78,11 +84,18 @@ const deleteUser = asyncHandler(async (req, res) => {
 // @desc MyPage
 // @route get /userInfo
 const getUserInfo = asyncHandler(async (req, res) => {
-    const userInfo = await User.findById(req.user.id);
+
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, jwtSecret);
+    const id = decoded.id;
+    const userInfo = await User.findById(id);
+    console.log('userInfo :>> ', userInfo);
     if (!userInfo) {
-        return res.status(401).json({ message: "사용자 정보가 없습니다." });
+        res.send("사용자 정보가 없습니다.");
+        // res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
     // 경로 설정 필요
+    console.log('userInfo.nickname :>> ', userInfo.nickname);
     res.render("account", { user: userInfo });
 });
 
@@ -149,12 +162,12 @@ const googleredirect = asyncHandler(async (req, res) => {
             Authorization: `Bearer ${resp.data.access_token}`,
         },
     });
-    
+
     let user = await User.findOne({ username: resp2.data.id });
     if (!user) {
         // Google 정보를 사용하여 새 사용자 생성
-        user = await User.create({ 
-            username: resp2.data.id, 
+        user = await User.create({
+            username: resp2.data.id,
             nickname: resp2.data.name,
             password: resp2.data.id
         });

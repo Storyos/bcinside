@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../public/css/liked.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>내가 댓글단 게시물 목록</h1>
+    <div class="container">
+        
+        <div class="inner">
+            
+            <ul class="user-list">
+                <% comments.forEach(comment => { %>
+                    <% if (!comment.isreply) { %>
+                        <% let post = posts.find(post => post._id.toString() === comment.postid.toString()); %>
+                        <li><%= post.title %> - <%= comment.text %></li>
+                        <!-- 게시물 제목과 댓글 내용을 출력 -->
+                    <% } %>
+                <% }); %>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+
+
