@@ -1,0 +1,19 @@
+@import "./header.css";
+@import "./main.css";
+@import "./login.css";
+@import "./post.css";
+/* @import "./post_write.css"; */
+@import "./sign.css";
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+footer {
+  text-align: center;
+  color:white;
+  padding: 1rem;
+  background-color: #3b488f;
+}

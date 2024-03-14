@@ -1,30 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/header.css">
-    <title>Document</title>
-</head>
-<body>
-    <header>
-        
-        <div class="logo">Logo</div>
-        <nav class="menu">
-          <button>1조</button>
-          <button>2조</button>
-          <button>3조</button>
-          <button>4조</button>
-          <button>5조</button>
-      
-          <div class="search-container">
-              <form method="get">
-                <input type="search" placeholder="검색">
-              </form>
-            </div>      
-        </nav>
-        <div class="account-container">
-          <a href=""><button>Login</button></a>
-          <button>Signin</button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="shortcut icon" href="images/logo.png" type="image/x-icon" />
+    <title>BC INSIDE</title>
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="main-nav1">
+        <button class="header-logo">
+          <a href="/"><img src="/images/logo-full.png" alt="BC INSIDE" /></a>
+        </button>
+        <div class="header-search-container">
+          <form action="/posts/search" method="GET">
+            <input
+              class="header-search"
+              name="keyword"
+              type="text"
+              placeholder="검색"
+            />
+            <button class="header-search-btn" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
         </div>
-      </header>
+        <div class="account-container">
+          <a href="/users/login"><button>로그인</button></a>
+          <a href="/users/signUp"><button>회원가입</button></a>
+        </div>
+      </nav>
+      <nav class="main-nav2">
+        <a href="/posts/1"><button>1조</button></a>
+        <a href="/posts/2"><button>2조</button></a>
+        <a href="/posts/3"><button>3조</button></a>
+        <a href="/posts/4"><button>4조</button></a>
+        <a href="/posts/5"><button>5조</button></a>
+      </nav>
+    </header>
