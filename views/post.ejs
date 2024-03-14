@@ -1,32 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/post.css" />
-    <title>Post Update Page</title>
-  </head>
-  <body>
-    <header>
-      <div class="logo">Logo</div>
-      <nav class="menu">
-        <button>1조</button>
-        <button>2조</button>
-        <button>3조</button>
-        <button>4조</button>
-        <button>5조</button>
-
-        <div class="search-container">
-          <form method="get">
-            <input type="search" placeholder="검색" />
-          </form>
-        </div>
-      </nav>
-      <div class="account-container">
-        <button>Login</button>
-        <button>Signin</button>
-      </div>
-    </header>
+<%- include("./include/header") %>
     <div class="post-container">
       <div class="post-title">
         <input type="text" value="제목" readonly />
@@ -52,5 +24,4 @@ document.querySelector('.like-button').addEventListener('click', function() {
   likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
 });
 </script> -->
-  </body>
-</html>
+<%- include("./include/footer") %>

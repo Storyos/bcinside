@@ -28,3 +28,7 @@ body {
 .user-list li:last-child {
     border-bottom: none;
 }
+
+h1{
+    text-align: center;
+}

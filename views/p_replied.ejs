@@ -1,28 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/liked.css">
-    <title>Replied list</title>
-</head>
-<body>
-    <h1>내가 댓글단 게시물 목록</h1>
-    <div class="container">
-        
-        <div class="inner">
+<%- include("./include/header") %>
+    <body>
+        <h1>내가 댓글단 게시물 목록</h1>
+        <div class="container">
             
-            <ul class="user-list">
-                <% comments.forEach(comment => { %>
-                    <% if (!comment.isreply) { %>
-                        <% let post = posts.find(post => post._id.toString() === comment.postid.toString()); %>
-                        <li><%= post.title %> - <%= comment.text %></li>
-                        <!-- 게시물 제목과 댓글 내용을 출력 -->
-                    <% } %>
-                <% }); %>
-            </ul>
+            <div class="inner">
+                
+                <ul class="user-list">
+                    <% comments.forEach(comment => { %>
+                        <% if (!comment.isreply) { %>
+                            <% let post = posts.find(post => post._id.toString() === comment.postid.toString()); %>
+                            <li><%= post.title %> - <%= comment.text %></li>
+                            <!-- 게시물 제목과 댓글 내용을 출력 -->
+                        <% } %>
+                    <% }); %>
+                </ul>
+            </div>
         </div>
-    </div>
-</body>
-</html>
-
+    </body>
+    <%- include("./include/footer") %>

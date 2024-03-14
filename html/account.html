@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Account Management</title>
     <link rel="stylesheet" href="../public/css/account.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
 </head>
 <body>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> -->
     <div class="container">
         <div class="head">
         </div>
@@ -31,10 +33,10 @@
                 </div>
                 <!-- 작성/댓글/좋아요한 게시물 -->
                 <div class="info2">
-                        <ul class="im1">
-                            <li><a href="./p_written.ejs">작성한 게시물</a></li>
-                            <li><a href="./p_replied.ejs">댓글단 게시물 </a></li>
-                            <li><a href="./p_liked.ejs">좋아요한 게시물</a></li>
+                        <ul style="list-style-image:linear-gradient(to left bottom, red, blue)">
+                            <li><a href="./p_written.ejs" >작성한 게시물</a></li>
+                            <li><a href="./p_replied.ejs" >댓글단 게시물 </a></li>
+                            <li><a href="./p_liked.ejs" >좋아요한 게시물</a></li>
                         </ul>
                 </div>
             </div>
@@ -42,13 +44,13 @@
             <div class="bottom-wrapper">
                 <div class="bottom">
                     <div class="block_user">
-                        <button type="button" onclick="window.open('./block_user')">회원 차단한 목록(유저)</button>
+                        <button type="button" class="myButton" onclick="window.open('./block_user')">회원 차단한 목록(유저)</button>
                     </div>
                     <div class="block_admin">
-                        <button type="button" onclick="window.open('./block_admin')">회원 차단한 목록(관리자)</button>
+                        <button type="button" class="myButton" onclick="window.open('./block_admin')">회원 차단한 목록(관리자)</button>
                     </div>
                     <div class="withdraw">
-                        <button type="button">계정 삭제</button>
+                        <button type="button" class="myButton-d">계정 삭제</button>
                     </div>
                 </div>
             </div>

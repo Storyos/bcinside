@@ -1,33 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" />
-    <title>Community Website</title>
-  </head>
-  <body>
-    <header>
-      <div class="logo">Logo</div>
-      <nav class="menu">
-        <button>1조</button>
-        <button>2조</button>
-        <button>3조</button>
-        <button>4조</button>
-        <button>5조</button>
-
-        <div class="search-container">
-          <form method="get">
-            <input type="search" placeholder="Search the community" />
-          </form>
-        </div>
-      </nav>
-      <div class="account-container">
-        <button type="button" onclick="window.open('users/googleLogin')">Login</button>
-        <button>Signin</button>
-      </div>
-    </header>
-
+<%- include("./include/header") %>
     <div class="main-content">
       <section class="content">
         <!-- Main content like posts or articles goes here -->
@@ -53,6 +24,4 @@
       </aside>
     </div>
 
-    <footer>&copy; 2024 Community Website</footer>
-  </body>
-</html>
+<%- include("./include/footer") %>

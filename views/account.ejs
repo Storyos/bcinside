@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Account Management</title>
-</head>
+<%- include("./include/header") %>
 <body>
     <div class="container">
         <div class="head">
@@ -16,42 +10,42 @@
                     <form action="">
                         <div class="info_group">
                             <label for=""><strong>아이디</strong></label>
-                            &nbsp;&nbsp;, <% user.id %>
+                            &nbsp;&nbsp; <% user.id %>
                         </div>
                         <div class="info_group">
                             <label for=""><strong>비밀번호</strong></label>
-                            &nbsp;&nbsp;, <% user.password %>
+                            &nbsp;&nbsp; <% user.password %>
                         </div>
                         <div class="info_group">
                             <label for=""><strong>닉네임</strong></label>
-                            &nbsp;&nbsp;, <% user.nickname %>
+                            &nbsp;&nbsp; <% user.nickname %>
                         </div>
                     </form>
                 </div>
                 <!-- 작성/댓글/좋아요한 게시물 -->
                 <div class="info2">
-                    <form action="">
-                        <ul>
-                            <li><a href="./p_written.ejs">작성한 게시물</a></li>
-                            <li><a href="./p_replied.ejs">댓글단 게시물 </a></li>
-                            <li><a href="./p_liked.ejs">좋아요한 게시물</a></li>
+                        <ul style="list-style-image:linear-gradient(to left bottom, red, blue)">
+                            <li><a href="./p_written.ejs" >작성한 게시물</a></li>
+                            <li><a href="./p_replied.ejs" >댓글단 게시물 </a></li>
+                            <li><a href="./p_liked.ejs" >좋아요한 게시물</a></li>
                         </ul>
-                    </form>
                 </div>
             </div>
             <!-- 차단한 목록 -->
-            <div class="bottom">
-                <div class="block_user">
-                    <button type="button" onclick="window.open('./block_user')">회원 차단한 목록(유저)</button>
-                </div>
-                <div class="block_admin">
-                    <button type="button" onclick="window.open('./block_admin')">회원 차단한 목록(관리자)</button>
-                </div>
-                <div class="withdraw">
-                    <button type="button">계정 삭제</button>
+            <div class="bottom-wrapper">
+                <div class="bottom">
+                    <div class="block_user">
+                        <button type="button" class="myButton" onclick="window.open('./block_user')">회원 차단한 목록(유저)</button>
+                    </div>
+                    <div class="block_admin">
+                        <button type="button" class="myButton" onclick="window.open('./block_admin')">회원 차단한 목록(관리자)</button>
+                    </div>
+                    <div class="withdraw">
+                        <button type="button" class="myButton-d">계정 삭제</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
-</html>
+    <%- include("./include/footer") %>
