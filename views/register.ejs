@@ -3,16 +3,20 @@
         <form action="/register" method="post" class="register">
             <ul>
                 <li>
-                    <label for="userid">아이디</label>
-                    <input type="text" placeholder="ID" name="id" required>
+
+                    <label for="">아이디</label>
+                    <input type="text" placeholder="username" name="username" required>
+
                 </li>
                 <li>
                     <label for="password">비밀번호</label>
                     <input type="password" placeholder="PW 8~12 Words" name="password" required>
                 </li>
                 <li>
-                    <label for="password2">비밀번호 확인</label>
-                    <input type="password" placeholder="Password Again" name="password" required>
+
+                    <label for="">비밀번호 확인</label>
+                    <input type="password" placeholder="Password Again" name="password2" required>
+
                 </li>
                 <li>
                     <label for="nickname">닉네임</label>
@@ -20,7 +24,8 @@
                 </li>
             </ul>   
             <div class="join">
-                <button type="button" class="register-btn" onclick='checkPW();'>회원가입</button>
+                <button type="submit" class="btn" onclick='checkPW();'>회원가입</button>
+
                 <p class="margin">이미 계정을 갖고 계신가요? <a href="./login">지금 로그인하기</a></p>
             </div>
         </form>
