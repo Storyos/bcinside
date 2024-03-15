@@ -8,7 +8,7 @@
     <h1 class="post-title">
     </h1>
     <span class="post-user"> <%= post.user.nickname %></span>
-    <button class="user-block-btn">유저 차단</button>
+    <button class="user-block-btn" onclick="blockUser()">유저 차단</button>
     <span class="post-time"> <%= date %></span>
   </div>
   <div class="post-contents">
@@ -36,6 +36,26 @@
       <% } %>
   </div>
   
+  <script>
+    function blockUser() {
+      var userId = '<%= post.user._id %>';
+    
+      fetch('/users/blocking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+    </script>
 </div>
 
 <script src="/public/js/post.js"></script>

@@ -92,9 +92,10 @@ const postMakePost = async (req, res) => {
     // 작성한 post를 작성자의 user collection에도 반영
     res.redirect(201, `/post/${newPost._id}`);
   } catch (error) {
+    console.log(error)
     return res
       .status(400)
-      .render("error", (errorMessage = "Can not make post"));
+      .render("error", {errorMessage: "Can not make post"});
   }
 };
 

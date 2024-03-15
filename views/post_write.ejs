@@ -1,18 +1,19 @@
 <%- include("./include/header") %>
-    <form action="#" method="post">
-      <input type="text" id="name" name="name" placeholder="제목" />
+    <form action="/posts/makePost" method="post" class="postWrite">
+      <input type="text" id="name" name="title" placeholder="제목" class="title" required />
       <div class="radio-group">
-        <label><input type="radio" name="rating" value="1" />1조</label>
-        <label><input type="radio" name="rating" value="2" />2조</label>
-        <label><input type="radio" name="rating" value="3" />3조</label>
-        <label><input type="radio" name="rating" value="4" />4조</label>
-        <label><input type="radio" name="rating" value="5" />5조</label>
+        <label><input type="radio" name="category" value="1" />1조</label>
+        <label><input type="radio" name="category" value="2" />2조</label>
+        <label><input type="radio" name="category" value="3" />3조</label>
+        <label><input type="radio" name="category" value="4" />4조</label>
+        <label><input type="radio" name="category" value="5" />5조</label>
       </div>
       <textarea
         id="comment"
-        name="comment"
-        rows="4"
+        name="content"
+        rows="15"
         placeholder="내용 입력"
+        required
       ></textarea>
       <input type="submit" value="제출" />
     </form>

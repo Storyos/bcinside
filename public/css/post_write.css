@@ -1,25 +1,22 @@
 /* Reset margins and paddings */
-body,
-html {
+.postWrite {
   margin: 0;
   padding: 0;
   height: 100%; /* Make sure the body takes full viewport height */
   width: 100%; /* Make sure the body takes full viewport width */
+                /* Form takes full width of the viewport */
+  max-width: none;
 }
 
-/* Adjust the form to be more responsive */
-form {
-  width: 100%; /* Form takes full width of the viewport */
-  max-width: none; /* Remove max-width restriction */
-}
 
-input[type="text"],
+.title[type="text"],
 textarea {
   width: calc(100% - 20px); /* Adjust width taking padding into account */
   padding: 10px;
   margin: 10px 0;
   border: 1px solid #ccc;
   box-sizing: border-box;
+  resize: none;
 }
 
 .radio-group {
@@ -34,8 +31,9 @@ input[type="submit"] {
   width: calc(100% - 20px); /* Match the width of text inputs and textarea */
   padding: 10px;
   margin-top: 10px;
+  margin-bottom: 20px;
   border: 1px solid #ccc;
-  background-color: #4caf50;
+  background-color: #3b488f;
   color: white;
   cursor: pointer;
 }

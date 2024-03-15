@@ -48,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const { username, password, nickname } = req.body;
     // ID 중복검사 Logic
     console.log('username :>> ', username);
-    const users = await User.findOne({username:username });
+    const users = await User.findOne({ username: username });
     if (users) {
         return res.send("이미 존재하는 회원아이디입니다.")
     }
@@ -95,7 +95,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
     const userInfo = await User.findById(id);
     console.log('userInfo :>> ', userInfo);
     if (!userInfo) {
-        res.send("사용자 정보가 없습니다.");
+        res.redirect("사용자 정보가 없습니다.");
         // res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
     // 경로 설정 필요
@@ -128,17 +128,28 @@ const logout = asyncHandler((req, res) => {
     res.redirect("/");
 })
 
-const getBlockedUser = asyncHandler(async(req,res)=>{
+const getBlockedUser = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token,jwtSecret);
+    const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
     const user = await User.findById(id);
-    const blockedUsers = await User.find({_id:user.blocked});
-    if(blockedUsers===null){
-        res.status(401).json({message:"Theres is NO blocked User"});
+    const blockedUsers = await User.find({ _id: user.blocked });
+    if (blockedUsers === null) {
+        res.status(401).json({ message: "Theres is NO blocked User" });
     }
-    res.render("block_user",{blockedUsers:blockedUsers});
+    res.render("block_user", { blockedUsers: blockedUsers });
 });
+
+const blockUser = asyncHandler(async (req, res) => {
+    const blockingID = req.body.userId;
+    console.log('blockingID :>> ', blockingID);
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token, jwtSecret);
+    const id = decoded.id;
+    const user = await User.findById(id);
+    user.blocked.push(blockingID);
+    user.save();
+})
 
 // Google OAUTH 관련 
 // 
@@ -193,30 +204,30 @@ const googleredirect = asyncHandler(async (req, res) => {
     res.redirect("/");
 });
 
-const myPosts = asyncHandler(async(req,res)=>{
+const myPosts = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token,jwtSecret);
+    const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
     user = await User.findById(id);
     console.log('user :>> ', user);
-    res.render("p_written",user);
+    res.render("p_written", user);
 });
 
-const mylikes = asyncHandler(async(req,res)=>{
+const mylikes = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token,jwtSecret);
+    const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
     const user = await User.findById(id);
-    res.render("p_liked",{user:user});
+    res.render("p_liked", { user: user });
 })
 
-const myReplies = asyncHandler(async(req,res)=>{
+const myReplies = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
-    const decoded = jwt.verify(token,jwtSecret);
+    const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
-    const comments = await Comment.find({user:id});
+    const comments = await Comment.find({ user: id });
     console.log('comments :>> ', comments);
-    res.render("p_replied",{comments:comments});
+    res.render("p_replied", { comments: comments });
 })
 
 module.exports = {
@@ -234,4 +245,5 @@ module.exports = {
     myPosts,
     myReplies,
     mylikes,
+    blockUser,
 };

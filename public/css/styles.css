@@ -2,8 +2,13 @@
 @import "./main.css";
 @import "./login.css";
 @import "./post.css";
-/* @import "./post_write.css"; */
+@import "./post_write.css";
 @import "./sign.css";
+@import "./account.css";
+@import "./block.css";
+@import "./liked.css";
+@import "./register.css";
+
 @import "./postList.css";
 @import "./account.css";
 * {
