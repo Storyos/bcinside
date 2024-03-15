@@ -42,7 +42,8 @@ const getCategory = async (req, res) => {
 
 const getSearchResult = async (req, res) => {
   // 게시판이 같은 게시글을 받아옴
-  const { keyword } = req.body;
+  const keyword = req.query.keyword;
+  console.log(keyword);
   const posts = await Post.find({ title: { $regex: keyword, $options: "i" } });
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));

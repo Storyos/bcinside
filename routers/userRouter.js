@@ -13,6 +13,9 @@ const {
     updateUserInfo,
     logout,
     getBlockedUser,
+    myPosts,
+    myReplies,
+    mylikes,
 } = require("../controllers/userController");
 
 
@@ -32,7 +35,7 @@ userRouter.route("/signUp")
 
 userRouter.route("/userInfo")
     .get(getUserInfo)
-    .patch(checkLogin,updateUserInfo)
+    .patch(checkLogin, updateUserInfo)
     .delete(deleteUser);
 
 userRouter.route("/block_user")
@@ -41,4 +44,13 @@ userRouter.route("/block_user")
 userRouter.route("/logout")
     .get(logout);
 
-module.exports= userRouter;
+userRouter.route("/myPosts")
+    .get(myPosts);
+
+userRouter.route("/myReplies")
+    .get(myReplies);
+
+userRouter.route("/mylikes")
+    .get(mylikes);
+
+module.exports = userRouter;
