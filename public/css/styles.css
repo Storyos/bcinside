@@ -4,6 +4,7 @@
 @import "./post.css";
 /* @import "./post_write.css"; */
 @import "./sign.css";
+@import "./postList.css";
 
 * {
   margin: 0;
@@ -13,7 +14,7 @@
 
 footer {
   text-align: center;
-  color:white;
+  color: white;
   padding: 1rem;
   background-color: #3b488f;
 }
