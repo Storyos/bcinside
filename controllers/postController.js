@@ -1,3 +1,4 @@
+const asyncHandler = require("express-async-handler");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
@@ -73,12 +74,14 @@ const getMakePost = (req, res) => {
   res.status(200).render("post_write");
 };
 
-const postMakePost = async (req, res) => {
-  const { title, category, content, _id } = req.body;
+const postMakePost = asyncHandler(async (req, res) => {
+  const { title, category, content } = req.body;
   // const {
   //   user: { _id },
   // } = req.session;
-
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token,jwtSecret);
+  const _id = decoded.id;
   try {
     const newPost = await Post.create({
       title,
@@ -86,18 +89,19 @@ const postMakePost = async (req, res) => {
       content,
       user: _id,
     });
+
     const user = await User.findById(_id);
     user.posts.push(newPost._id);
     user.save();
     // 작성한 post를 작성자의 user collection에도 반영
-    res.redirect(201, `/post/${newPost._id}`);
+    res.redirect(201, `/posts/${newPost._id}`);
   } catch (error) {
     console.log(error)
     return res
       .status(400)
       .render("error", {errorMessage: "Can not make post"});
   }
-};
+});
 
 const getUpdatePost = async (req, res) => {
   const { id } = req.params;
