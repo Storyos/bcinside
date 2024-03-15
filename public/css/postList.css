@@ -1,67 +1,38 @@
-        /* Styles for the layout */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-          }
-        
-          header {
-            display: flex;
-            justify-content: space-between;
-            padding: 1rem;
-            background-color: #f3f3f3;
-          }
-        
-          .logo {
-            font-size: 2rem;
-            font-weight: bold;
-          }
-        
-          .menu {
-            display: flex;
-            align-items: center;
-          }
-        
-          .menu button {
-            margin-left: 1rem;
-            padding: 0.5rem 1rem;
-          }
-        
-          .search-container {
-            display: flex;
-            justify-content: center;
-            padding: 1rem;
-          }
-        
-          .search-container input {
-            width: 100%;
-            max-width: 300px;
-            padding: 0.5rem;
-          }
+.posts_container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%;
+  margin: 20px 0;
+  width: 100%;
+}
 
+.posts_box_title {
+  margin: 10px 0;
+}
 
+.posts_box {
+  display: flex;
+  width: 90%;
+}
 
-          
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-        }
-        .main-content {
-            display: flex;
-            padding: 20px;
-            align-items: flex-start; /* Align the children to the start of the container */
-        }
-        .posts {
-            flex-grow: 1;
-        }
-        .account-info {
-            width: 200px; /* Fixed width */
-            height: 150px; /* Fixed height */
-            padding: 10px;
-            border: 1px solid #ccc;
-            margin-left: 20px;
-            overflow-y: auto; /* Add scroll if content overflows */
-        }
+.post_box_line {
+  border-bottom: 1px solid black;
+}
+
+.posts_list {
+  list-style: none;
+  font-size: 20px;
+  padding: 5px;
+}
+
+.posts_list:first-child {
+  width: 300px;
+}
+
+.posts_list :nth-child(2) {
+  width: 300px;
+}
+
+.posts_list:last-child {
+  width: 500px;
+}

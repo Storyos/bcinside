@@ -3,32 +3,41 @@ const Comment = require("../models/Comment");
 const User = require("../models/User");
 
 const getIndex = async (req, res) => {
-  // 모든 게시글을 받아옴(시간순)
-  // 모든 게시글을 받아옴 (인기순)
-  // const posts = await Post.find();
-  const posts = await Post.find({}).sort({ createdAt: -1 }) //시간순
-  const postsSortLike=await Post.find().sort({like: -1}) // 인기순
-  console.log({postsSortLike})
-  if (!posts)
+  // 모든 게시글을 받아옴
+  const newPosts = await Post.find().populate("user");
+  if (!newPosts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-    res.status(200).render("index",{posts},{postsSortLike});
+  newPosts.sort(function compare(a, b) {
+    return b.createdAt.getTime() - a.createdAt.getTime();
+  });
+  const hotPosts = newPosts.filter(() => true);
+  hotPosts.sort(function compare(a, b) {
+    return b.like - a.like;
+  });
+  res.status(200).render("index", { newPosts, hotPosts });
 };
 
 const getAllPosts = async (req, res) => {
-  // 모든 게시글을 받아옴(조 갤러리 별로 시간 순)
-  const posts = await Post.find();
+  // 모든 게시글을 받아옴
+  const posts = await Post.find().populate("user");
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
+  posts.sort(function compare(a, b) {
+    return b.createdAt.getTime() - a.createdAt.getTime();
+  });
   return res.status(200).render("post_list", { posts });
 };
 
 const getCategory = async (req, res) => {
   // 게시판이 같은 게시글을 받아옴
   const { category } = req.params;
-  const posts = await Post.find({ category });
+  const posts = await Post.find({ category }).populate("user");
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  return res.status(200).render("post_list", posts, category);
+  posts.sort(function compare(a, b) {
+    return b.createdAt.getTime() - a.createdAt.getTime();
+  });
+  return res.status(200).render("post_list", { posts, category });
 };
 
 const getSearchResult = async (req, res) => {
@@ -37,12 +46,12 @@ const getSearchResult = async (req, res) => {
   const posts = await Post.find({ title: { $regex: keyword, $options: "i" } });
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  return res.status(200).render("searchResult", posts, keyword);
+  return res.status(200).render("searchResult", { posts, keyword });
 };
 
 const getPost = async (req, res) => {
   const { id } = req.params;
-  const post = await Post.findById(id).populate("User").populate("Comment");
+  const post = await Post.findById(id).populate("user").populate("comment");
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   const comments = post.comments;
@@ -59,10 +68,10 @@ const getMakePost = (req, res) => {
 };
 
 const postMakePost = async (req, res) => {
-  const { title, category, content } = req.body;
-  const {
-    user: { _id },
-  } = req.session;
+  const { title, category, content, _id } = req.body;
+  // const {
+  //   user: { _id },
+  // } = req.session;
 
   try {
     const newPost = await Post.create({
@@ -88,7 +97,7 @@ const getUpdatePost = async (req, res) => {
   const post = await Post.findById(id);
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  return res.status(201).render("post-update", post);
+  return res.status(201).render("post-update", { post });
 };
 
 const postUpdatePost = async (req, res) => {
