@@ -95,7 +95,7 @@ const getUserInfo = asyncHandler(async (req, res) => {
     const userInfo = await User.findById(id);
     console.log('userInfo :>> ', userInfo);
     if (!userInfo) {
-        res.send("사용자 정보가 없습니다.");
+        res.redirect("사용자 정보가 없습니다.");
         // res.status(401).json({ message: "사용자 정보가 없습니다." });
     }
     // 경로 설정 필요

@@ -3,7 +3,7 @@
     // 회원 삭제 확인 함수
     function confirmDelete() {
         // 사용자에게 확인 메시지를 보여줍니다.
-        var result = confirm("회원 삭제 하시겠습니까?");
+        var result = confirm("회원 탈퇴 하시겠습니까?");
         
         // 사용자가 확인을 선택한 경우
         if (result) {
@@ -47,15 +47,15 @@
                     <form action="">
                         <div class="info_group">
                             <label for=""><strong>아이디</strong></label>
-                            &nbsp;&nbsp;, <%= user.id %>
+                            &nbsp;&nbsp; <%= user.id %>
                         </div>
                         <div class="info_group">
                             <label for=""><strong>비밀번호</strong></label>
-                            &nbsp;&nbsp;, <%= user.password %>
+                            &nbsp;&nbsp; <%= user.password %>
                         </div>
                         <div class="info_group">
                             <label for=""><strong>닉네임</strong></label>
-                            &nbsp;&nbsp;, <%= user.nickname %>
+                            &nbsp;&nbsp; <%= user.nickname %>
                         </div>
                     </form>
                 </div>
@@ -77,11 +77,13 @@
                     <div class="block_admin">
                         <button type="button" class="myButton" onclick="window.open('./block_admin')">회원 차단한 목록(관리자)</button>
                     </div>
+                    
                     <form method="post" action="/?_method=DELETE">
-                        <div class="withdraw">
-                            <button type="button" class="myButton-d" onclick="confirmDelete();">계정 삭제</button>
-                        </div>
-                    </form method="post" action="/?_method=DELETE">
+                            <div class="withdraw">
+                                <button type="submit" class="myButton-d" onclick="confirmDelete();">계정 삭제</button>
+                            </div>
+                    </form>
+                    
                 </div>
             </div>
         </div>
