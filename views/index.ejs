@@ -1,34 +1,37 @@
 <%- include("./include/header") %>
 <div class="posts_container">
   <h1 class="posts_box_title">최신 게시글</h1>
-    <ul class="posts_box">
-      <li class="posts_list">제목</li>
-      <li class="posts_list">작성자</li>
-      <li class="posts_list">작성시간</li>
+  <ul class="posts_box post_box_line">
+    <li class="posts_list_title">제목</li>
+    <li class="posts_list_user">작성자</li>
+    <li class="posts_list_time">작성시간</li>
     </ul>
     <% newPosts.forEach(post => { %>
-    <a href="/posts/<%= post._id %>">
       <ul class="posts_box">
-        <li class="posts_list"><%= post.title %></li>
-        <li class="posts_list"><%= post.user.nickname%></li>
-        <li class="posts_list"><%= post.createdAt %></li>
+        <a href="/posts/<%= post._id %>">
+        <li class="posts_list_title"><%= post.title %></li>
+        </a>
+        <li class="posts_list_user"><%= post.user.nickname%></li>
+        <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>
       </ul>
-    </a>
     <% }); %>
 </div>
 <div class="posts_container">
   <h1 class="posts_box_title">인기 게시글</h1>
-  <ul class="posts_box">
-    <li class="posts_list">제목</li>
-    <li class="posts_list">작성자</li>
-    <li class="posts_list">작성시간</li>
-  </ul>
-    <% hotPosts.forEach(post => { %>
-    <ul class="posts_box">
-      <li class="posts_list"><%= post.title %></li>
-      <li class="posts_list"><%= post.user.nickname%></li>
-      <li class="posts_list"><%= post.createdAt %></li>
+  <ul class="posts_box post_box_line">
+    <li class="posts_list_title">제목</li>
+    <li class="posts_list_user">작성자</li>
+    <li class="posts_list_time">작성시간</li>
     </ul>
+  
+    <% hotPosts.forEach(post => { %>
+      <ul class="posts_box">
+        <a href="/posts/<%= post._id %>">
+          <li class="posts_list_title"><%= post.title %></li>
+          </a>
+        <li class="posts_list_user"><%= post.user.nickname%></li>
+        <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>
+      </ul>
     <% }); %>
 </div>
 </div>
