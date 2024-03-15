@@ -105,7 +105,7 @@ const postMakePost = async (req, res) => {
     user.posts.push(newPost.id);
     user.save();
     // 작성한 post를 작성자의 user collection에도 반영
-    res.status(201).render("post", { post: newPost });
+    res.status(201).render("post", { post: newPost, formattedDate });
   } catch (error) {
     console.log(error);
     return res
