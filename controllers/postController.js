@@ -112,7 +112,7 @@ const postMakePost = async (req, res) => {
       .status(400)
       .render("error", { errorMessage: "Can not make post" });
   }
-});
+};
 
 const getUpdatePost = async (req, res) => {
   const { id } = req.params;

@@ -204,20 +204,11 @@ const googleredirect = asyncHandler(async (req, res) => {
 });
 
 const myPosts = asyncHandler(async (req, res) => {
-<<<<<<< HEAD
   const token = req.cookies.token;
   const decoded = jwt.verify(token, jwtSecret);
   const id = decoded.id;
-  const user = await User.findById(id);
-  console.log("user :>> ", user);
-  res.render("p_written", user);
-=======
-    const token = req.cookies.token;
-    const decoded = jwt.verify(token, jwtSecret);
-    const id = decoded.id;
-    const myposts = await Post.find({user:id})
-    res.render("p_written", {myposts : myposts});
->>>>>>> origin/main
+  const myposts = await Post.find({ user: id });
+  res.render("p_written", { myposts: myposts });
 });
 
 const mylikes = asyncHandler(async (req, res) => {
