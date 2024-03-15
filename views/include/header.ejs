@@ -27,12 +27,12 @@
           </form>
         </div>
         <div class="account-container">
-          <% if (!token) { %>
-            <a href="/users/login"><button>로그인</button></a>
-            <a href="/users/signUp"><button>회원가입</button></a>
+          <% if (isLoggedIn) { %>
+          <a href="/users/logout"><button>로그아웃</button></a>
+          <a href="/users/account"><button>내정보</button></a>
           <% } else { %>
-            <a href="/users/userInfo"><button>마이페이지</button></a>
-            <a href="/users/logout"><buutton>로그아웃</buutton></a>
+          <a href="/users/login"><button>로그인</button></a>
+          <a href="/users/signUp"><button>회원가입</button></a>
           <% } %>
         </div>
       </nav>
