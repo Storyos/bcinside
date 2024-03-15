@@ -1,6 +1,9 @@
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
+require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const jwtSecret = process.env.JWT_SECRET;
 
 const getIndex = async (req, res) => {
   // 모든 게시글을 받아옴
@@ -51,7 +54,7 @@ const getSearchResult = async (req, res) => {
 
 const getPost = async (req, res) => {
   const { id } = req.params;
-  const post = await Post.findById(id).populate("user").populate("comment");
+  const post = await Post.findById(id).populate("user").populate("comments");
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   const comments = post.comments;
@@ -137,6 +140,39 @@ const deletePost = async (req, res) => {
   return res.redirect(200, "/post");
 };
 
+const addComment = async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, jwtSecret);
+  const _id = decoded.id;
+
+  const post = await Post.findById(id);
+  if (!post) return console.log("댓글작성에 실패했습니다");
+  // 게시글 or 유저 정보 확인 실패
+  try {
+    const newComment = await Comment.create({
+      user: _id,
+      text,
+      post: id,
+      isReply: false,
+    });
+    post.comments.push(newComment._id);
+    post.save();
+    res.redirect(201, `/posts/${id}`);
+    // const commentElement = document.createElement("div");
+    // commentElement.classList.add("comment-list");
+    // commentElement.innerHTML = `
+    //     <span class="comment-user">${user.nickname}</span>
+    //     <span class="comment-text">${commentInput.innerText}</span>
+    //     <span class="comment-time">${newComment.createdAt}</spam>
+    //   `;
+    // commentsContainer.append(commentElement);
+  } catch {
+    console.log("댓글작성에 실패했습니다");
+  }
+};
+
 module.exports = {
   getPost,
   getMakePost,
@@ -148,4 +184,5 @@ module.exports = {
   getCategory,
   getAllPosts,
   getSearchResult,
+  addComment,
 };
