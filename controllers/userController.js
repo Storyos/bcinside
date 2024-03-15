@@ -124,6 +124,17 @@ const logout = asyncHandler((req, res) => {
     res.redirect("/");
 })
 
+const getBlockedUser = asyncHandler(async(req,res)=>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,jwtSecret);
+    const id = decoded.id;
+    const user = await User.findById(id);
+    const blockedUsers = await User.find({_id:user.blocked});
+    if(blockedUsers===null){
+        res.status(401).json({message:"Theres is NO blocked User"});
+    }
+    res.render("block_user",{blockedUsers:blockedUsers});
+});
 
 // Google OAUTH 관련 
 // 
@@ -195,4 +206,5 @@ module.exports = {
     getUserInfo,
     updateUserInfo,
     logout,
+    getBlockedUser,
 };
