@@ -12,6 +12,7 @@ const {
     getUserInfo,
     updateUserInfo,
     logout,
+    getBlockedUser,
 } = require("../controllers/userController");
 
 
@@ -33,6 +34,9 @@ userRouter.route("/userInfo")
     .get(getUserInfo)
     .patch(checkLogin,updateUserInfo)
     .delete(deleteUser);
+
+userRouter.route("/block_user")
+    .get(getBlockedUser);
 
 userRouter.route("/logout")
     .get(logout);
