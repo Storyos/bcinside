@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
     blocked:[{
         type:mongoose.Schema.Types.ObjectId,
         required: false,
-        ref: "User"
+        ref: "User",
+        unique: true,
     }]
 
 
