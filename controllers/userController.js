@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
+const Post = require("../models/Post");
 const bcrypt = require("bcrypt")
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -72,6 +73,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         const decoded = jwt.verify(token, jwtSecret);
         const id = decoded.id;
         await User.findByIdAndDelete(id);
+        await post.findByIdAndDelete(id);
     } catch (err) {
         return res.status(401).json({ message: "토큰 오류" });
     }
