@@ -16,6 +16,7 @@ const {
     myPosts,
     myReplies,
     mylikes,
+    blockUser,
 } = require("../controllers/userController");
 
 
@@ -40,6 +41,9 @@ userRouter.route("/userInfo")
 
 userRouter.route("/block_user")
     .get(getBlockedUser);
+
+userRouter.route("/blocking")
+    .post(blockUser);
 
 userRouter.route("/logout")
     .get(logout);
