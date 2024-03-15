@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/User");
 const Post = require("../models/Post");
+const Comment = require("../models/Comment");
 const bcrypt = require("bcrypt")
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
@@ -73,7 +74,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         const decoded = jwt.verify(token, jwtSecret);
         const id = decoded.id;
         await User.findByIdAndDelete(id);
-        await post.findByIdAndDelete(id);
+        await Post.findByIdAndDelete(id);
     } catch (err) {
         return res.status(401).json({ message: "토큰 오류" });
     }
@@ -192,11 +193,31 @@ const googleredirect = asyncHandler(async (req, res) => {
     res.redirect("/");
 });
 
+const myPosts = asyncHandler(async(req,res)=>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,jwtSecret);
+    const id = decoded.id;
+    user = await User.findById(id);
+    console.log('user :>> ', user);
+    res.render("p_written",user);
+});
 
+const mylikes = asyncHandler(async(req,res)=>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,jwtSecret);
+    const id = decoded.id;
+    const user = await User.findById(id);
+    res.render("p_liked",{user:user});
+})
 
-
-
-
+const myReplies = asyncHandler(async(req,res)=>{
+    const token = req.cookies.token;
+    const decoded = jwt.verify(token,jwtSecret);
+    const id = decoded.id;
+    const comments = await Comment.find({user:id});
+    console.log('comments :>> ', comments);
+    res.render("p_replied",{comments:comments});
+})
 
 module.exports = {
     googleLogin,
@@ -210,4 +231,7 @@ module.exports = {
     updateUserInfo,
     logout,
     getBlockedUser,
+    myPosts,
+    myReplies,
+    mylikes,
 };
