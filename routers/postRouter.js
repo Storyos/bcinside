@@ -11,6 +11,7 @@ const {
   getAllPosts,
   getCategory,
   getSearchResult,
+  addComment,
 } = require("../controllers/postController");
 
 const postRouter = express.Router();
@@ -21,7 +22,7 @@ postRouter.get("/:category([1-5]{1})", getCategory);
 
 postRouter.get("/search", getSearchResult);
 
-postRouter.route("/:id([0-9a-f]{24})").get(getPost);
+postRouter.route("/:id([0-9a-f]{24})").get(getPost).post(addComment);
 postRouter
   .route("/:id([0-9a-f]{24})/edit")
   .get(getUpdatePost)

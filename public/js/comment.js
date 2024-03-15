@@ -31,15 +31,15 @@ const addComment = async (req, res) => {
     });
     post.comments.push(newComment._id);
     post.save();
-
-    const commentElement = document.createElement("div");
-    commentElement.classList.add("comment-list");
-    commentElement.innerHTML = `
-        <span class="comment-user">${user.nickname}</span>
-        <span class="comment-text">${commentInput.innerText}</span>
-        <span class="comment-time">${newComment.createdAt}</spam>
-      `;
-    commentsContainer.append(commentElement);
+    res.redirect(201, `/posts/${id}`);
+    // const commentElement = document.createElement("div");
+    // commentElement.classList.add("comment-list");
+    // commentElement.innerHTML = `
+    //     <span class="comment-user">${user.nickname}</span>
+    //     <span class="comment-text">${commentInput.innerText}</span>
+    //     <span class="comment-time">${newComment.createdAt}</spam>
+    //   `;
+    // commentsContainer.append(commentElement);
   } catch {
     alert("댓글작성에 실패했습니다");
   }
