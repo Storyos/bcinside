@@ -8,7 +8,7 @@
         // 사용자가 확인을 선택한 경우
         if (result) {
             // 서버로 회원 삭제 요청을 보냅니다.
-            fetch('/deleteUser', {
+            fetch('/users/userInfo', {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

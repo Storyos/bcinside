@@ -75,6 +75,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     } catch (err) {
         return res.status(401).json({ message: "토큰 오류" });
     }
+    console.log("일단 삭제는 됨");
     res.clearCookie("token");
     res.redirect("/");
     // DB에서 cookie ID 삭제
