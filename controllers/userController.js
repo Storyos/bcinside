@@ -208,9 +208,8 @@ const myPosts = asyncHandler(async (req, res) => {
     const token = req.cookies.token;
     const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
-    user = await User.findById(id);
-    console.log('user :>> ', user);
-    res.render("p_written", user);
+    const myposts = await Post.find({user:id})
+    res.render("p_written", {myposts : myposts});
 });
 
 const mylikes = asyncHandler(async (req, res) => {

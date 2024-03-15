@@ -1,16 +1,19 @@
 <%- include("./include/header") %>
-<body>
-    <h1>내가 작성한 게시물 목록</h1>
+
+    <body>
+        <h1>내가 작성한 게시물 목록</h1>
         <div class="container">
-            
+
             <div class="inner">
-                
+
                 <ul class="user-list">
-                    <% user.posts.forEach(post=> { %>
-                        <li><%= post.title %></li>
+                    <% myposts.forEach(myposts=> { %>
+                        <li>
+                            <%=myposts.title %>
+                        </li>
                         <% }); %>
                 </ul>
             </div>
         </div>
-</body>
+    </body>
     <%- include("./include/footer") %>
