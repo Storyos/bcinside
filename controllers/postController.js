@@ -204,6 +204,18 @@ const deleteComment = async (req, res) => {
   }
 };
 
+const clickThumb = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const post = await Post.findById(id);
+    post.like += 1;
+    post.save();
+    res.status(200).redirect(`/posts/${id}`);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = {
   getPost,
   getMakePost,
@@ -217,4 +229,5 @@ module.exports = {
   getSearchResult,
   addComment,
   deleteComment,
+  clickThumb,
 };

@@ -17,6 +17,13 @@
   <div class="post-contents">
     <%= post.content %>
   </div>
+  <div class="post-liked">
+    <a class="post-liked" href="/posts/thumb/<%= post._id %>">
+    <span class="post-thumb">
+    👍🏻 <%= post.like %>
+  </a>
+  </span>
+  </div>
   <% if (user === post.user.id) { %>
   <div class="post-control-box">
     <a href="/posts/<%= post.id %>/edit"><button type="submit">수정</button></a>
@@ -31,6 +38,8 @@
         <li class="comments-time"><%= formattedDate(comment.createdAt) %></li>
         <% if (user === comment.user.id) { %>
           <li><a href="/posts/deleteComment/<%= comment._id %>"><button>X</button></a></li>
+          <% }else{ %>
+          <li class="comments-empty-list">X</li>
           <% } %>
       </ul>
     <% }); %>
@@ -61,22 +70,7 @@
         console.error('Error:', error);
       });
     }
-    function deleteComment (id){
-      console.log("ho")
-      fetch('/posts/deleteComment', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ id })
-      })
-      .then(response => response.json())
-      .catch((error) => {
-        console.error('Error:', error);
-      });
-    }
     </script>
 </div>
 
-<script src="/public/js/post.js"></script>
 <%- include("./include/footer") %>
