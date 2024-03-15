@@ -1,13 +1,12 @@
 /* Reset margins and paddings */
 .postWrite {
-  margin: 0;
+  margin: 0 10%;
   padding: 0;
   height: 100%; /* Make sure the body takes full viewport height */
-  width: 100%; /* Make sure the body takes full viewport width */
-                /* Form takes full width of the viewport */
+  width: 80%; /* Make sure the body takes full viewport width */
+  /* Form takes full width of the viewport */
   max-width: none;
 }
-
 
 .title[type="text"],
 textarea {

@@ -1,19 +1,12 @@
 <%- include("./include/header") %>
-
-    <body>
-        <h1>내가 작성한 게시물 목록</h1>
-        <div class="container">
-
-            <div class="inner">
-
-                <ul class="user-list">
-                    <% myposts.forEach(myposts=> { %>
-                        <li>
-                            <%=myposts.title %>
-                        </li>
-                        <% }); %>
-                </ul>
-            </div>
-        </div>
-    </body>
-    <%- include("./include/footer") %>
+<h1>내가 작성한 게시물 목록</h1>
+<div class="container">
+  <div class="inner">
+    <ul class="user-list">
+      <% myposts.forEach(myposts=> { %>
+      <li><%=myposts.title %></li>
+      <% }); %>
+    </ul>
+  </div>
+</div>
+<%- include("./include/footer") %> >>>>>>> origin/main

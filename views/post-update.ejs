@@ -9,13 +9,9 @@
     <label><input type="radio" name="category" value="4" />4조</label>
     <label><input type="radio" name="category" value="5" />5조</label>
   </div>
-  <textarea
-    id="comment"
-    name="content"
-    rows="15"
-    value="<%- post.content %>"
-    required
-  ></textarea>
+  <textarea id="comment" name="content" rows="15" required>
+<%- post.content %></textarea
+  >
   <input type="submit" value="제출" />
 </form>
 <%- include("./include/footer") %>

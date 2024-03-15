@@ -1,11 +1,11 @@
 <%- include("./include/header") %>
 
 <div class="posts_container">
-  <h1 class="posts_box_title"><%- category %>조</h1>
+  <h1 class="posts_box_title"><%- keyword %> 검색결과</h1>
   <ul class="posts_box post_box_line">
-    <li class="posts_list_title">제목</li>
-    <li class="posts_list_user">작성자</li>
-    <li class="posts_list_time">작성시간</li>
+    <li class="posts_list">제목</li>
+    <li class="posts_list">작성자</li>
+    <li class="posts_list">작성시간</li>
   </ul>
   <% posts.forEach(post => { %>
   <ul class="posts_box">
@@ -15,7 +15,9 @@
     <li class="posts_list_user"><%= post.user.nickname%></li>
     <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>
   </ul>
-  <% }); %>
+  <% }); %> <% if(posts == []){ %>
+  <span><%- keyword %> 검색결과가 존재하지 않습니다.</span>
+  <% } %>
 </div>
 
 <%- include("./include/footer") %>

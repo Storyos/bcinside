@@ -1,7 +1,7 @@
 .post-container {
   display: flex;
   flex-direction: column;
-  padding: 10px 10%;
+  padding: 20px 10%;
 }
 
 .post-category {
@@ -10,6 +10,8 @@
 }
 .post-header-box {
   margin-bottom: 30px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .post-header-box span {
   font-size: 20px;

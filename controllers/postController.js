@@ -6,6 +6,16 @@ require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const jwtSecret = process.env.JWT_SECRET;
 
+const formattedDate = (d) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, "0");
+  const day = String(d.getDate()).padStart(2, "0");
+  const hours = String(d.getHours()).padStart(2, "0");
+  const minutes = String(d.getMinutes()).padStart(2, "0");
+  const seconds = String(d.getSeconds()).padStart(2, "0");
+  return `${year}.${month}.${day} ${hours}:${minutes}:${seconds}`;
+};
+
 const getIndex = async (req, res) => {
   // 모든 게시글을 받아옴
   const newPosts = await Post.find().populate("user");
@@ -18,7 +28,7 @@ const getIndex = async (req, res) => {
   hotPosts.sort(function compare(a, b) {
     return b.like - a.like;
   });
-  res.status(200).render("index", { newPosts, hotPosts });
+  res.status(200).render("index", { newPosts, hotPosts, formattedDate });
 };
 
 const getAllPosts = async (req, res) => {
@@ -29,7 +39,7 @@ const getAllPosts = async (req, res) => {
   posts.sort(function compare(a, b) {
     return b.createdAt.getTime() - a.createdAt.getTime();
   });
-  return res.status(200).render("post_list", { posts });
+  return res.status(200).render("post_list", { posts, formattedDate });
 };
 
 const getCategory = async (req, res) => {
@@ -42,17 +52,21 @@ const getCategory = async (req, res) => {
   posts.sort(function compare(a, b) {
     return b.createdAt.getTime() - a.createdAt.getTime();
   });
-  return res.status(200).render("post_list", { posts, category });
+  return res
+    .status(200)
+    .render("post_list", { posts, category, formattedDate });
 };
 
 const getSearchResult = async (req, res) => {
   // 게시판이 같은 게시글을 받아옴
   const keyword = req.query.keyword;
-  console.log(keyword);
   const posts = await Post.find({ title: { $regex: keyword, $options: "i" } });
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  return res.status(200).render("searchResult", { posts, keyword });
+  console.log(posts);
+  return res
+    .status(200)
+    .render("search-result", { posts, keyword, formattedDate });
 };
 
 const getPost = async (req, res) => {
@@ -66,7 +80,7 @@ const getPost = async (req, res) => {
   const replyComments = comments.filter((comment) => comment.isReply === true);
   return res
     .status(200)
-    .render("post", { post, originComments, replyComments });
+    .render("post", { post, originComments, replyComments, formattedDate });
   //comment는 html tag id값에 collection id 값을 저장해야 한다 ex) comment-list.id = originComment._id
 };
 
@@ -91,7 +105,7 @@ const postMakePost = async (req, res) => {
     user.posts.push(newPost.id);
     user.save();
     // 작성한 post를 작성자의 user collection에도 반영
-    res.status(201).render("post", { post: newPost });
+    res.status(201).render("post", { post: newPost, formattedDate });
   } catch (error) {
     console.log(error);
     return res

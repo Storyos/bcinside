@@ -2,19 +2,22 @@
 
 <div class="post-container">
   <h1 class="post-category">
-  <%= post.category %>조
+  <a href="/posts/<%= post.category %>"><%= post.category %>조</a>
   <h1>
   <div class="post-header-box">
     <h1 class="post-title">
+      <%= post.title %>
     </h1>
     <span class="post-user"> <%= post.user.nickname %></span>
+    <% if (user !== post.user.id && isLoggedIn ) { %>
     <button class="user-block-btn" onclick="blockUser()">유저 차단</button>
-    <span class="post-time"> <%= post.createdAt %></span>
+    <% } %>
+    <span class="post-time"> <%= formattedDate(post.createdAt) %></span>
   </div>
   <div class="post-contents">
     <%= post.content %>
   </div>
-  <% if (user == post.user.id) { %>
+  <% if (user === post.user.id) { %>
   <div class="post-control-box">
     <a href="/posts/<%= post.id %>/edit"><button type="submit">수정</button></a>
     <a href="/posts/<%= post.id %>/delete"><button type="submit">삭제</button></a>
@@ -25,7 +28,7 @@
       <ul class="post-comments-box">
         <li><%= comment.user %></li>
         <li><%= comment.text %></li>
-        <li><%= comment.createdAt %></li>
+        <li><%= formattedDate(comment.createdAt) %></li>
       </ul>
     <% }); %>
     <% if (isLoggedIn) { %>
