@@ -60,7 +60,9 @@ const getCategory = async (req, res) => {
 const getSearchResult = async (req, res) => {
   // 게시판이 같은 게시글을 받아옴
   const keyword = req.query.keyword;
-  const posts = await Post.find({ title: { $regex: keyword, $options: "i" } });
+  const posts = await Post.find({
+    title: { $regex: keyword, $options: "i" },
+  }).populate("user");
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   console.log(posts);
@@ -209,7 +211,7 @@ const clickThumb = async (req, res) => {
   try {
     const post = await Post.findById(id);
     post.like += 1;
-    post.save();
+    await post.save();
     res.status(200).redirect(`/posts/${id}`);
   } catch (error) {
     console.log(error);
