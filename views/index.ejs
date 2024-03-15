@@ -18,6 +18,11 @@
 </div>
 <div class="posts_container">
   <h1 class="posts_box_title">인기 게시글</h1>
+  <ul class="posts_box">
+    <li class="posts_list">제목</li>
+    <li class="posts_list">작성자</li>
+    <li class="posts_list">작성시간</li>
+  </ul>
     <% hotPosts.forEach(post => { %>
     <ul class="posts_box">
       <li class="posts_list"><%= post.title %></li>

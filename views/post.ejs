@@ -6,7 +6,6 @@
   <h1>
   <div class="post-header-box">
     <h1 class="post-title">
-      <%= post.title %>
     </h1>
     <span class="post-user"> <%= post.user.nickname %></span>
     <button class="user-block-btn">유저 차단</button>
@@ -15,6 +14,12 @@
   <div class="post-contents">
     <%= post.content %>
   </div>
+  <% if (user == post.user.id) { %>
+  <div class="post-control-box">
+    <a href="/posts/<%= post.id %>/edit"><button type="submit">수정</button></a>
+    <a href="/posts/<%= post.id %>/delete"><button type="submit">삭제</button></a>
+  </div>
+  <% } %>
   <div class="post-comments-container">
     <% post.comments.forEach(comment => { %>
       <ul class="post-comments-box">
@@ -23,10 +28,12 @@
         <li><%= comment.createdAt %></li>
       </ul>
     <% }); %>
-    <form class="post-comment-add">
-      <input class="post-comment-input" name="text" type="text">
-      <button class="post-comment-btn" type="submit">작성</button>
-    </form>
+    <% if (isLoggedIn) { %>
+      <form class="post-comment-add">
+        <input class="post-comment-input" name="text" type="text">
+        <button class="post-comment-btn" type="submit">작성</button>
+      </form>
+      <% } %>
   </div>
   
 </div>
