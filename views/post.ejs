@@ -9,7 +9,7 @@
     </h1>
     <span class="post-user"> <%= post.user.nickname %></span>
     <button class="user-block-btn">유저 차단</button>
-    <span class="post-time"> <%= post.createdAt %></span>
+    <span class="post-time"> <%= date %></span>
   </div>
   <div class="post-contents">
     <%= post.content %>
@@ -37,4 +37,6 @@
   </div>
   
 </div>
+
+<script src="/public/js/post.js"></script>
 <%- include("./include/footer") %>

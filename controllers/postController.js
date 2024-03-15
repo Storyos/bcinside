@@ -35,6 +35,7 @@ const getCategory = async (req, res) => {
   // 게시판이 같은 게시글을 받아옴
   const { category } = req.params;
   const posts = await Post.find({ category }).populate("user");
+
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   posts.sort(function compare(a, b) {
@@ -56,6 +57,7 @@ const getSearchResult = async (req, res) => {
 const getPost = async (req, res) => {
   const { id } = req.params;
   const post = await Post.findById(id).populate("user").populate("comments");
+  const date = post.createdAt.toLocaleString();
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   const comments = post.comments;
@@ -63,7 +65,7 @@ const getPost = async (req, res) => {
   const replyComments = comments.filter((comment) => comment.isReply === true);
   return res
     .status(200)
-    .render("post", { post, originComments, replyComments });
+    .render("post", { post, originComments, replyComments, date });
   //comment는 html tag id값에 collection id 값을 저장해야 한다 ex) comment-list.id = originComment._id
 };
 
