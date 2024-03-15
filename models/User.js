@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     nickname: {
         type: String,
         required: true,
+        unique: true,
     },
     liked_post: [{
         type: mongoose.Schema.Types.ObjectId,
@@ -27,7 +28,8 @@ const userSchema = new mongoose.Schema({
     blocked:[{
         type:mongoose.Schema.Types.ObjectId,
         required: false,
-        ref: "User"
+        ref: "User",
+        unique: true,
     }]
 
 

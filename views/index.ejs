@@ -1,27 +1,36 @@
 <%- include("./include/header") %>
-    <div class="main-content">
-      <section class="content">
-        <!-- Main content like posts or articles goes here -->
-        <h1>게시물 (시간 순서 내역)</h1>
-        <div class="newPost">
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-      </section>
-      <aside class="sidebar">
-        <!-- Sidebar content like links or info goes here -->
-        <h2>인기 게시물</h2>
-        <div class="popularPost">
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-        </div>
-      </aside>
-    </div>
+<div class="posts_container">
+  <h1 class="posts_box_title">최신 게시글</h1>
+    <ul class="posts_box">
+      <li class="posts_list">제목</li>
+      <li class="posts_list">작성자</li>
+      <li class="posts_list">작성시간</li>
+    </ul>
+    <% newPosts.forEach(post => { %>
+    <a href="/posts/<%= post._id %>">
+      <ul class="posts_box">
+        <li class="posts_list"><%= post.title %></li>
+        <li class="posts_list"><%= post.user.nickname%></li>
+        <li class="posts_list"><%= post.createdAt %></li>
+      </ul>
+    </a>
+    <% }); %>
+</div>
+<div class="posts_container">
+  <h1 class="posts_box_title">인기 게시글</h1>
+  <ul class="posts_box">
+    <li class="posts_list">제목</li>
+    <li class="posts_list">작성자</li>
+    <li class="posts_list">작성시간</li>
+  </ul>
+    <% hotPosts.forEach(post => { %>
+    <ul class="posts_box">
+      <li class="posts_list"><%= post.title %></li>
+      <li class="posts_list"><%= post.user.nickname%></li>
+      <li class="posts_list"><%= post.createdAt %></li>
+    </ul>
+    <% }); %>
+</div>
+</div>
 
 <%- include("./include/footer") %>

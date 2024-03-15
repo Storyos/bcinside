@@ -1,46 +1,68 @@
 .post-container {
-  background-color: white;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  padding: 20px;
-  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 10%;
 }
+
+.post-category {
+  border-bottom: 3px solid #3b488f;
+  margin: 20px 0;
+}
+.post-header-box {
+  margin-bottom: 30px;
+}
+.post-header-box span {
+  font-size: 20px;
+}
+
 .post-title {
+  font-size: 30px;
+}
+
+.post-time {
+  opacity: 0.6;
+}
+
+.post-contents {
+  font-size: 18px;
   margin-bottom: 20px;
 }
-.post-content {
-  border: 1px solid #ccc;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 20px;
+
+.post-comments-container {
+  border-top: 3px solid #3b488f;
+  border-bottom: 3px solid #3b488f;
 }
-.like-button {
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  margin-right: 5px;
+
+.post-comment-add {
+  border-top: 3px solid #3b488f;
+  display: flex;
 }
-.like-counter {
-  display: inline-block;
-  margin-right: 10px;
-}
-.action-buttons {
-  text-align: center;
-  margin-bottom: 20px;
-}
-.comment-section {
-  margin-top: 20px;
-}
-.comment-input {
-  width: 100%;
+
+.post-comment-input {
+  flex-grow: 1;
+  height: 60px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
-.submit-comment {
-  padding: 10px 20px;
-  width: 100%;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
+
+.post-comment-btn {
+  width: 50px;
+  margin: 10px 0 10px 10px;
+}
+
+.user-block-btn {
+  border: 2px solid #3b488f;
+  padding: 3px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.post-control-box {
+  margin-bottom: 20px;
+}
+.post-control-box button {
+  border: 2px solid #3b488f;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
 }

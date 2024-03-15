@@ -2,13 +2,15 @@
 @import "./main.css";
 @import "./login.css";
 @import "./post.css";
-/* @import "./post_write.css"; */
+@import "./post_write.css";
 @import "./sign.css";
 @import "./account.css";
 @import "./block.css";
 @import "./liked.css";
 @import "./register.css";
 
+@import "./postList.css";
+@import "./account.css";
 * {
   margin: 0;
   padding: 0;
@@ -17,7 +19,12 @@
 
 footer {
   text-align: center;
-  color:white;
+  color: white;
   padding: 1rem;
   background-color: #3b488f;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

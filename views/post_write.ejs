@@ -1,6 +1,6 @@
 <%- include("./include/header") %>
-    <form action="#" method="post">
-      <input type="text" id="name" name="name" placeholder="제목" />
+    <form action="#" method="post" class="postWrite">
+      <input type="text" id="name" name="name" placeholder="제목" class="title" />
       <div class="radio-group">
         <label><input type="radio" name="rating" value="1" />1조</label>
         <label><input type="radio" name="rating" value="2" />2조</label>
@@ -11,7 +11,7 @@
       <textarea
         id="comment"
         name="comment"
-        rows="4"
+        rows="15"
         placeholder="내용 입력"
       ></textarea>
       <input type="submit" value="제출" />

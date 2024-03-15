@@ -1,13 +1,16 @@
 <%- include("./include/header") %>
- <body>
+
+    <body>
         <h1>내가 좋아요한 게시물 목록</h1>
-    <div>
-        <ul>
-            <% user.liked_post.forEach(postId=> { %>
-                <% let post=posts.find(post=> post._id.toString() === postId.toString()); %>
-                    <li><%= post.title %></li>
-                    <% }); %>
-        </ul>
-    </div>
- </body>
-<%- include("./include/footer") %>
+        <div>
+            <ul>
+                <% user.liked_post.forEach(postId=> { %>
+                    <% let post=posts.find(post=> post._id.toString() === postId.toString()); %>
+                        <li>
+                            <%= post.title %>
+                        </li>
+                        <% }); %>
+            </ul>
+        </div>
+    </body>
+    <%- include("./include/footer") %>

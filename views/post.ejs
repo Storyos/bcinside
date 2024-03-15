@@ -1,27 +1,60 @@
 <%- include("./include/header") %>
-    <div class="post-container">
-      <div class="post-title">
-        <input type="text" value="제목" readonly />
-      </div>
-      <div class="post-content">내용</div>
-      <div class="action-buttons">
-        <button class="like-button"></button>
-        <span class="like-counter">0</span>
-        <button>수정</button>
-        <button>삭제</button>
-      </div>
-      <div class="comment-section">
-        <input type="text" class="comment-input" placeholder="댓글 달기..." />
-        <button class="submit-comment">등록</button>
-      </div>
-    </div>
 
-    <!-- <script>
-// Example JavaScript to handle like button click
-document.querySelector('.like-button').addEventListener('click', function() {
-  // Increment the like counter
-  var likeCounter = document.querySelector('.like-counter');
-  likeCounter.textContent = parseInt(likeCounter.textContent) + 1;
-});
-</script> -->
+<div class="post-container">
+  <h1 class="post-category">
+  <%= post.category %>조
+  <h1>
+  <div class="post-header-box">
+    <h1 class="post-title">
+    </h1>
+    <span class="post-user"> <%= post.user.nickname %></span>
+    <button class="user-block-btn" onclick="blockUser()">유저 차단</button>
+    <span class="post-time"> <%= post.createdAt %></span>
+  </div>
+  <div class="post-contents">
+    <%= post.content %>
+  </div>
+  <% if (user == post.user.id) { %>
+  <div class="post-control-box">
+    <a href="/posts/<%= post.id %>/edit"><button type="submit">수정</button></a>
+    <a href="/posts/<%= post.id %>/delete"><button type="submit">삭제</button></a>
+  </div>
+  <% } %>
+  <div class="post-comments-container">
+    <% post.comments.forEach(comment => { %>
+      <ul class="post-comments-box">
+        <li><%= comment.user %></li>
+        <li><%= comment.text %></li>
+        <li><%= comment.createdAt %></li>
+      </ul>
+    <% }); %>
+    <% if (isLoggedIn) { %>
+      <form class="post-comment-add">
+        <input class="post-comment-input" name="text" type="text">
+        <button class="post-comment-btn" type="submit">작성</button>
+      </form>
+      <% } %>
+  </div>
+  
+  <script>
+    function blockUser() {
+      var userId = '<%= post.user._id %>';
+    
+      fetch('/users/blocking', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userId: userId })
+      })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Success:', data);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+    </script>
+</div>
 <%- include("./include/footer") %>
