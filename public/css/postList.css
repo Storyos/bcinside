@@ -8,13 +8,16 @@
 
 .posts_box_title {
   border-bottom: 3px solid #3b488f;
-  margin: 20px 0;
+  margin: 20px auto;
+  width: 100%;
 }
 
 .posts_box {
   display: flex;
-  width: 90%;
+  width: 100%;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 3px auto;
+  align-items: center;
 }
 
 .posts_box li {

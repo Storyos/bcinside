@@ -15,7 +15,9 @@
     <li class="posts_list_user"><%= post.user.nickname%></li>
     <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>
   </ul>
-  <% }); %>
+  <% }); %> <% if(posts == []){ %>
+  <span><%- keyword %> 검색결과가 존재하지 않습니다.</span>
+  <% } %>
 </div>
 
 <%- include("./include/footer") %>
