@@ -32,7 +32,7 @@ userRouter.route("/signUp")
 userRouter.route("/userInfo")
     .get(getUserInfo)
     .patch(checkLogin,updateUserInfo)
-    .delete(checkLogin,deleteUser);
+    .delete(deleteUser);
 
 userRouter.route("/logout")
     .get(logout);

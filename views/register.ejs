@@ -1,18 +1,22 @@
 <%- include("./include/header") %>
     <div class="container">
-        <form action="" method="post" class="register">
+        <form id="registerForm" action="/signUp" method="post" class="register">
             <ul>
                 <li>
-                    <label for="userid">아이디</label>
-                    <input type="text" placeholder="ID" name="username" required>
+
+                    <label for="">아이디</label>
+                    <input type="text" placeholder="username" name="username" required>
+
                 </li>
                 <li>
                     <label for="password">비밀번호</label>
                     <input type="password" placeholder="PW 8~12 Words" name="password" required>
                 </li>
                 <li>
-                    <label for="password2">비밀번호 확인</label>
-                    <input type="password" placeholder="Password Again" name="password" required>
+
+                    <label for="">비밀번호 확인</label>
+                    <input type="password" placeholder="Password Again" name="password2" required>
+
                 </li>
                 <li>
                     <label for="nickname">닉네임</label>
@@ -20,9 +24,23 @@
                 </li>
             </ul>   
             <div class="join">
-                <button type="submit" class="register-btn" onclick='checkPW();'>회원가입</button>
+                <button type="submit" class="btn" onclick='checkAndSubmit();'>회원가입</button>
+
                 <p class="margin">이미 계정을 갖고 계신가요? <a href="./login">지금 로그인하기</a></p>
             </div>
         </form>
     </div>
     <%- include("./include/footer") %>
+
+    <script>
+        function checkAndSubmit() {
+            var password = document.getElementById("password").value;
+            var password2 = document.getElementById("password2").value;
+        
+            if (password !== password2) {
+                alert("비밀번호가 일치하지 않습니다.");
+            } else {
+                document.getElementById("registerForm").submit();
+            }
+        }
+        </script>
