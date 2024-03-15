@@ -71,11 +71,11 @@ const getSearchResult = async (req, res) => {
 
 const getPost = async (req, res) => {
   const { id } = req.params;
-  const post = await Post.findById(id).populate("user").populate("comments");
+  const post = await Post.findById(id).populate("user");
   const date = post.createdAt.toLocaleString();
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  const comments = post.comments;
+  const comments = await Comment.find({ post: id }).populate("user");
   const originComments = comments.filter((comment) => comment.isReply !== true);
   const replyComments = comments.filter((comment) => comment.isReply === true);
   return res
@@ -178,7 +178,7 @@ const addComment = async (req, res) => {
     });
     post.comments.push(newComment._id);
     post.save();
-    res.redirect(201, `/posts/${id}`);
+    res.status(201).redirect(`/posts/${id}`);
     // const commentElement = document.createElement("div");
     // commentElement.classList.add("comment-list");
     // commentElement.innerHTML = `
@@ -189,6 +189,18 @@ const addComment = async (req, res) => {
     // commentsContainer.append(commentElement);
   } catch {
     console.log("댓글작성에 실패했습니다");
+  }
+};
+
+const deleteComment = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const comment = await Comment.findById(id);
+    const post = comment.post;
+    await Comment.deleteOne({ _id: id });
+    return res.status(200).redirect(`/posts/${post}`);
+  } catch (error) {
+    console.log(error);
   }
 };
 
@@ -204,4 +216,5 @@ module.exports = {
   getAllPosts,
   getSearchResult,
   addComment,
+  deleteComment,
 };

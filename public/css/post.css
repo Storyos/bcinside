@@ -68,3 +68,37 @@
   border-radius: 5px;
   background-color: white;
 }
+
+.post-comments-box {
+  display: flex;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.post-comments-box li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.post-comments-box li:first-child {
+  width: 120px;
+  font-weight: 600;
+}
+
+.post-comments-box li:nth-child(2) {
+  flex-grow: 1;
+}
+
+.comments-time {
+  opacity: 0.8;
+}
+
+.post-comments-box button {
+  border: none;
+  background-color: #3b488f;
+  color: white;
+  padding: 3px;
+  margin: 0 10px;
+}

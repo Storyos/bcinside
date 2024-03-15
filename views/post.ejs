@@ -24,15 +24,18 @@
   </div>
   <% } %>
   <div class="post-comments-container">
-    <% post.comments.forEach(comment => { %>
+    <% originComments.forEach(comment => { %>
       <ul class="post-comments-box">
-        <li><%= comment.user %></li>
+        <li><%= comment.user.nickname %></li>
         <li><%= comment.text %></li>
-        <li><%= formattedDate(comment.createdAt) %></li>
+        <li class="comments-time"><%= formattedDate(comment.createdAt) %></li>
+        <% if (user === comment.user.id) { %>
+          <li><a href="/posts/deleteComment/<%= comment._id %>"><button>X</button></a></li>
+          <% } %>
       </ul>
     <% }); %>
     <% if (isLoggedIn) { %>
-      <form class="post-comment-add">
+      <form method="POST" class="post-comment-add">
         <input class="post-comment-input" name="text" type="text">
         <button class="post-comment-btn" type="submit">작성</button>
       </form>
@@ -54,6 +57,20 @@
       .then(data => {
         console.log('Success:', data);
       })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+    }
+    function deleteComment (id){
+      console.log("ho")
+      fetch('/posts/deleteComment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ id })
+      })
+      .then(response => response.json())
       .catch((error) => {
         console.error('Error:', error);
       });
