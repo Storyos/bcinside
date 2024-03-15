@@ -1,3 +1,4 @@
+const asyncHandler = require("express-async-handler");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
@@ -99,6 +100,7 @@ const postMakePost = async (req, res) => {
       content,
       user: _id,
     });
+
     const user = await User.findById(_id);
     user.posts.push(newPost.id);
     user.save();
@@ -110,7 +112,7 @@ const postMakePost = async (req, res) => {
       .status(400)
       .render("error", { errorMessage: "Can not make post" });
   }
-};
+});
 
 const getUpdatePost = async (req, res) => {
   const { id } = req.params;
