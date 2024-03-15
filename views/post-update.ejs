@@ -1,0 +1,17 @@
+<%- include("./include/header") %>
+
+<div class="post-container">
+  <h1 class="post-category">
+    <%= post.category %>조
+    <h1>
+      <div class="post-header-box">
+        <h1 class="post-title"><%= post.title %></h1>
+        <span class="post-user"> <%= post.user.nickname %></span>
+        <button class="user-block-btn">유저 차단</button>
+        <span class="post-time"> <%= post.createdAt %></span>
+      </div>
+      <div class="post-contents"><%= post.content %></div>
+      <%- include("./include/footer") %>
+    </h1>
+  </h1>
+</div>

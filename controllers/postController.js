@@ -107,9 +107,9 @@ const getUpdatePost = async (req, res) => {
 
 const postUpdatePost = async (req, res) => {
   const { id } = req.params;
-  const {
-    user: { _id },
-  } = req.session;
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, jwtSecret);
+  const _id = decoded.id;
   const { title, category, content } = req.body;
   const post = await findById(id);
   if (!post)
@@ -126,9 +126,9 @@ const postUpdatePost = async (req, res) => {
 
 const deletePost = async (req, res) => {
   const { id } = req.params;
-  const {
-    user: { _id },
-  } = req.session;
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, jwtSecret);
+  const _id = decoded.id;
   const post = await Post.findById(id);
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
@@ -139,7 +139,7 @@ const deletePost = async (req, res) => {
       .render("error", (errorMessage = "Forbidden Approach"));
   }
   await Post.findByIdAndDelete(id);
-  return res.redirect(200, "/post");
+  return res.redirect(200, "/");
 };
 
 const addComment = async (req, res) => {
