@@ -1,17 +1,21 @@
 <%- include("./include/header") %>
-
-<div class="post-container">
-  <h1 class="post-category">
-    <%= post.category %>조
-    <h1>
-      <div class="post-header-box">
-        <h1 class="post-title"><%= post.title %></h1>
-        <span class="post-user"> <%= post.user.nickname %></span>
-        <button class="user-block-btn">유저 차단</button>
-        <span class="post-time"> <%= post.createdAt %></span>
-      </div>
-      <div class="post-contents"><%= post.content %></div>
-      <%- include("./include/footer") %>
-    </h1>
-  </h1>
-</div>
+<form action="/posts/<%- post.id %>/edit" method="post" class="postWrite">
+  <input type="text" id="name" name="title" placeholder="제목" class="title"
+  value="<%- post.title %>"" required />
+  <div class="radio-group">
+    <label><input type="radio" name="category" value="1" />1조</label>
+    <label><input type="radio" name="category" value="2" />2조</label>
+    <label><input type="radio" name="category" value="3" />3조</label>
+    <label><input type="radio" name="category" value="4" />4조</label>
+    <label><input type="radio" name="category" value="5" />5조</label>
+  </div>
+  <textarea
+    id="comment"
+    name="content"
+    rows="15"
+    value="<%- post.content %>"
+    required
+  ></textarea>
+  <input type="submit" value="제출" />
+</form>
+<%- include("./include/footer") %>

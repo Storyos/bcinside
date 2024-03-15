@@ -65,7 +65,7 @@ const getPost = async (req, res) => {
   const replyComments = comments.filter((comment) => comment.isReply === true);
   return res
     .status(200)
-    .render("post", { post, originComments, replyComments, date });
+    .render("post", { post, originComments, replyComments });
   //comment는 html tag id값에 collection id 값을 저장해야 한다 ex) comment-list.id = originComment._id
 };
 
@@ -74,11 +74,10 @@ const getMakePost = (req, res) => {
 };
 
 const postMakePost = async (req, res) => {
-  const { title, category, content, _id } = req.body;
-  // const {
-  //   user: { _id },
-  // } = req.session;
-
+  const { title, category, content } = req.body;
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, jwtSecret);
+  const _id = decoded.id;
   try {
     const newPost = await Post.create({
       title,
@@ -87,15 +86,15 @@ const postMakePost = async (req, res) => {
       user: _id,
     });
     const user = await User.findById(_id);
-    user.posts.push(newPost._id);
+    user.posts.push(newPost.id);
     user.save();
     // 작성한 post를 작성자의 user collection에도 반영
-    res.redirect(201, `/post/${newPost._id}`);
+    res.status(201).render("post", { post: newPost });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res
       .status(400)
-      .render("error", {errorMessage: "Can not make post"});
+      .render("error", { errorMessage: "Can not make post" });
   }
 };
 
@@ -113,7 +112,7 @@ const postUpdatePost = async (req, res) => {
   const decoded = jwt.verify(token, jwtSecret);
   const _id = decoded.id;
   const { title, category, content } = req.body;
-  const post = await findById(id);
+  const post = await Post.findById(id);
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   if (String(post.user) !== String(_id)) {
@@ -122,8 +121,8 @@ const postUpdatePost = async (req, res) => {
       .status(403)
       .render("error", (errorMessage = "Forbidden Approach"));
   }
-  await findByIdAndUpdate(id, { title, category, content });
-  return res.redirect(201, `/post/${id}`);
+  await Post.findByIdAndUpdate(id, { title, category, content });
+  return res.status(201).redirect(`/posts/${id}`);
 };
 
 const deletePost = async (req, res) => {
@@ -141,7 +140,7 @@ const deletePost = async (req, res) => {
       .render("error", (errorMessage = "Forbidden Approach"));
   }
   await Post.findByIdAndDelete(id);
-  return res.redirect(200, "/");
+  return res.status(200).redirect("/");
 };
 
 const addComment = async (req, res) => {
