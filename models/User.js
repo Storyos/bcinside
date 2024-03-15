@@ -13,6 +13,7 @@ const userSchema = new mongoose.Schema({
     nickname: {
         type: String,
         required: true,
+        unique: true,
     },
     liked_post: [{
         type: mongoose.Schema.Types.ObjectId,
