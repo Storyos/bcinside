@@ -5,10 +5,11 @@
         <!-- Main content like posts or articles goes here -->
         <h1>게시물 (시간 순서 내역)</h1>
         <div class="newPost">
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
-          <div>1</div>
+          <% posts.forEach(post => { %>
+            <div>
+             <a href="#"> <p><%= post.title %></p></a> <!-- 예시: 게시물 제목 -->
+            </div>
+          <% }) %>
         </div>
       </section>
       <aside class="sidebar">

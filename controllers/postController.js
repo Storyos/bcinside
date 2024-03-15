@@ -3,15 +3,19 @@ const Comment = require("../models/Comment");
 const User = require("../models/User");
 
 const getIndex = async (req, res) => {
-  // 모든 게시글을 받아옴
-  const posts = await Post.find();
+  // 모든 게시글을 받아옴(시간순)
+  // 모든 게시글을 받아옴 (인기순)
+  // const posts = await Post.find();
+  const posts = await Post.find({}).sort({ createdAt: -1 }) //시간순
+  const postsSortLike=await Post.find().sort({like: -1}) // 인기순
+  console.log({postsSortLike})
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  res.status(200).render("index", posts);
+    res.status(200).render("index",{posts},{postsSortLike});
 };
 
 const getAllPosts = async (req, res) => {
-  // 모든 게시글을 받아옴
+  // 모든 게시글을 받아옴(조 갤러리 별로 시간 순)
   const posts = await Post.find();
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
