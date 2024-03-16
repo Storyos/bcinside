@@ -224,8 +224,19 @@ const myReplies = asyncHandler(async (req, res) => {
   const decoded = jwt.verify(token, jwtSecret);
   const id = decoded.id;
   const comments = await Comment.find({ user: id });
-  console.log("comments :>> ", comments);
-  res.render("p_replied", { comments: comments });
+
+  const finedDataPromises = (comments.map(async comment=>{
+    const thispost = await Post.findById(comment.post);
+    const thistitle = thispost.title;
+    comment.title = thistitle;
+    return { ...comment.toObject(), title: thistitle };
+  }))
+
+  // Promise.all로 모든 Promise가 끝날 때까지 기다린다.
+  const finedData = await Promise.all(finedDataPromises);
+
+  console.log('finedData :>> ', finedData);
+  res.render("p_replied", { comments: finedData });
 });
 
 module.exports = {
