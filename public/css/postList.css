@@ -3,7 +3,7 @@
   flex-direction: column;
   padding: 0 10%;
   margin: 20px 0;
-  width: 100%;
+  width: 70%;
 }
 
 .posts_box_title {
@@ -42,4 +42,36 @@
 .post_box_line li {
   font-size: 20px;
   font-weight: 700;
+}
+
+.hot_posts_container {
+  width: 400px;
+  position: absolute;
+  right: 100px;
+  top: 263px;
+  border: 3px solid #3b488f;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.hot_posts_box {
+  display: flex;
+  flex-direction: column;
+}
+
+.hot_posts_box_title {
+  border-bottom: 3px solid #3b488f;
+  margin: 20px auto;
+}
+
+.hot_posts_list {
+  font-size: 20px;
+  margin: 5px 0;
+}
+
+.hot_posts_list span:first-child {
+  font-weight: 600;
+  color: #3b488f;
+  width: 20px;
+  display: inline-block;
 }

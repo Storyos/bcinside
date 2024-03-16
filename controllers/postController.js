@@ -24,10 +24,10 @@ const getIndex = async (req, res) => {
   newPosts.sort(function compare(a, b) {
     return b.createdAt.getTime() - a.createdAt.getTime();
   });
-  const hotPosts = newPosts.filter(() => true);
-  hotPosts.sort(function compare(a, b) {
-    return b.like - a.like;
-  });
+  const targetPosts = newPosts.filter(() => true);
+  targetPosts.sort((a, b) => b.like - a.like);
+  const hotPosts = targetPosts.slice(0, 10);
+  console.log(hotPosts.length);
   res.status(200).render("index", { newPosts, hotPosts, formattedDate });
 };
 
@@ -107,7 +107,7 @@ const postMakePost = async (req, res) => {
     user.posts.push(newPost.id);
     user.save();
     // 작성한 post를 작성자의 user collection에도 반영
-    res.status(201).render("post", { post: newPost, formattedDate });
+    res.status(201).redirect(`/posts/${newPost._id}`);
   } catch (error) {
     console.log(error);
     return res
@@ -157,8 +157,13 @@ const deletePost = async (req, res) => {
       .status(403)
       .render("error", (errorMessage = "Forbidden Approach"));
   }
-  await Post.findByIdAndDelete(id);
-  return res.status(200).redirect("/");
+  try {
+    await Comment.deleteMany({ post: id });
+    await Post.findByIdAndDelete(id);
+    return res.status(200).redirect("/");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 const addComment = async (req, res) => {
