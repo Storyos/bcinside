@@ -12,6 +12,8 @@ const {
   getCategory,
   getSearchResult,
   addComment,
+  deleteComment,
+  clickThumb,
 } = require("../controllers/postController");
 
 const postRouter = express.Router();
@@ -30,5 +32,9 @@ postRouter
 postRouter.get("/:id([0-9a-f]{24})/delete", deletePost);
 
 postRouter.route("/makePost").get(getMakePost).post(postMakePost);
+
+postRouter.get("/deleteComment/:id([0-9a-f]{24})", deleteComment);
+
+postRouter.get("/thumb/:id([0-9a-f]{24})", clickThumb);
 
 module.exports = postRouter;

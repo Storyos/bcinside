@@ -21,22 +21,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(MethodOverride("_method"));
 app.use(cookieParser());
-// app.use(
-//   session({
-//     secret: process.env.COOKIE_SECRET,
-//     resave: false,
-//     saveUninitialized: true,
-//     store: mongoStore.create({ mongoUrl: process.env.DB_URL }),
-//     cookie: { maxAge: dayTime },
-//   })
-// );
 
 app.use(isLoggedIn);
 app.use("/users", require("./routers/userRouter"));
 app.use("/", rootRouter);
 app.use("/posts", postRouter);
-
-
 
 app.listen(port, () => {
   console.log(`${port}번 포트에서 서버 실행 중 🚀`);
