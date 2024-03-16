@@ -10,7 +10,9 @@
   <% posts.forEach(post => { %>
   <ul class="posts_box">
     <a href="/posts/<%= post._id %>">
-      <li class="posts_list_title"><%= post.title %></li>
+      <li class="posts_list_title">
+        <%= post.title %> [<%= post.comments.length %> ]
+      </li>
     </a>
     <li class="posts_list_user"><%= post.user.nickname%></li>
     <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>

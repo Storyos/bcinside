@@ -1,0 +1,44 @@
+// getIndex
+db에 저장된 모든 post를 가져옵니다.
+최신순으로 정렬된 post들과
+인기순으로 정렬된 post를 보냅니다.
+
+
+// getCategory
+req.params 로 [1:5]의 숫자를 받아
+해당 게시판에 작성된 post를 가져와 보냅니다.
+
+// getSearchResult
+req.query로 검색어를 받아
+검색어가 제목에 포함된 post를 가져와 보냅니다.
+
+// getPost
+req.params로 id 값을 받아
+해당 id값을 가진 post를 가져와 보냅니다.
+
+// getMakePost
+게시글 작성 페이지를 불러옵니다.
+
+// postMakePost
+jwt token을 이용해 현재 로그인한 user의 정보를 받아와
+게시글 작성 페이지에서 작성한 내용의 post를 생성합니다.
+
+// getUpdatePost
+게시글 업데이트 페이지를 불러옵니다.
+
+// postUpdatePost
+기존에 존재하는 post를 수정된 내용으로 변경합니다.
+
+// deletePost
+로그인한 user와 post를 작성한 user가 동일한지 확인하고
+동일하다면 post에 달린 comment들과 post를 삭제합니다.
+
+// addComment
+comment를 생성해 post에 추가합니다.
+
+// deleteComment
+comment를 삭제합니다.
+
+//clickThumb
+현재 로그인중인 user가 해당 post의 추천을 누른적이 있는지 확인합니다.
+추천을 누른적이 없다면 추천수를 1증가 시키고 user의 like_post에 추가합니다.

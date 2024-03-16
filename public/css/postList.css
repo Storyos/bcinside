@@ -3,7 +3,8 @@
   flex-direction: column;
   padding: 0 10%;
   margin: 20px 0;
-  width: 70%;
+  width: 100%;
+  min-width: 800px;
 }
 
 .posts_box_title {
@@ -74,4 +75,20 @@
   color: #3b488f;
   width: 20px;
   display: inline-block;
+}
+
+.posts_list_comments {
+  opacity: 0.6;
+}
+
+@media (max-width: 1400px) {
+  .hot_posts_container {
+    display: none;
+  }
+}
+
+@media (min-width: 1400px) {
+  .posts_container {
+    width: 70%;
+  }
 }

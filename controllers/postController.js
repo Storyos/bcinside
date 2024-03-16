@@ -1,4 +1,3 @@
-const asyncHandler = require("express-async-handler");
 const Post = require("../models/Post");
 const Comment = require("../models/Comment");
 const User = require("../models/User");
@@ -27,7 +26,6 @@ const getIndex = async (req, res) => {
   const targetPosts = newPosts.filter(() => true);
   targetPosts.sort((a, b) => b.like - a.like);
   const hotPosts = targetPosts.slice(0, 10);
-  console.log(hotPosts.length);
   res.status(200).render("index", { newPosts, hotPosts, formattedDate });
 };
 
@@ -43,7 +41,7 @@ const getAllPosts = async (req, res) => {
 };
 
 const getCategory = async (req, res) => {
-  // 게시판이 같은 게시글을 받아옴
+  // 게시판별 게시글을 받아옴
   const { category } = req.params;
   const posts = await Post.find({ category }).populate("user");
 
@@ -65,16 +63,15 @@ const getSearchResult = async (req, res) => {
   }).populate("user");
   if (!posts)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
-  console.log(posts);
   return res
     .status(200)
     .render("search-result", { posts, keyword, formattedDate });
 };
 
 const getPost = async (req, res) => {
+  // 게시글 받아옴
   const { id } = req.params;
   const post = await Post.findById(id).populate("user");
-  const date = post.createdAt.toLocaleString();
   if (!post)
     return res.status(404).render("error", (errorMessage = "404 NOT FOUND"));
   const comments = await Comment.find({ post: id }).populate("user");
@@ -83,14 +80,15 @@ const getPost = async (req, res) => {
   return res
     .status(200)
     .render("post", { post, originComments, replyComments, formattedDate });
-  //comment는 html tag id값에 collection id 값을 저장해야 한다 ex) comment-list.id = originComment._id
 };
 
 const getMakePost = (req, res) => {
+  //글 작성 페이지
   res.status(200).render("post_write");
 };
 
 const postMakePost = async (req, res) => {
+  //게시글을 등록
   const { title, category, content } = req.body;
   const token = req.cookies.token;
   const decoded = jwt.verify(token, jwtSecret);
@@ -102,7 +100,6 @@ const postMakePost = async (req, res) => {
       content,
       user: _id,
     });
-
     const user = await User.findById(_id);
     user.posts.push(newPost.id);
     user.save();
@@ -117,6 +114,7 @@ const postMakePost = async (req, res) => {
 };
 
 const getUpdatePost = async (req, res) => {
+  //게시글 수정 페이지
   const { id } = req.params;
   const post = await Post.findById(id);
   if (!post)
@@ -125,6 +123,7 @@ const getUpdatePost = async (req, res) => {
 };
 
 const postUpdatePost = async (req, res) => {
+  //수정한 게시글을 등록
   const { id } = req.params;
   const token = req.cookies.token;
   const decoded = jwt.verify(token, jwtSecret);
@@ -144,6 +143,7 @@ const postUpdatePost = async (req, res) => {
 };
 
 const deletePost = async (req, res) => {
+  // 게시글 삭제
   const { id } = req.params;
   const token = req.cookies.token;
   const decoded = jwt.verify(token, jwtSecret);
@@ -167,6 +167,7 @@ const deletePost = async (req, res) => {
 };
 
 const addComment = async (req, res) => {
+  // 댓글 등록
   const { id } = req.params;
   const { text } = req.body;
   const token = req.cookies.token;
@@ -200,6 +201,7 @@ const addComment = async (req, res) => {
 };
 
 const deleteComment = async (req, res) => {
+  //댓글 삭제
   const { id } = req.params;
   try {
     const comment = await Comment.findById(id);
@@ -212,8 +214,23 @@ const deleteComment = async (req, res) => {
 };
 
 const clickThumb = async (req, res) => {
+  //추천
   const { id } = req.params;
+  const token = req.cookies.token;
+  const decoded = jwt.verify(token, jwtSecret);
+  const _id = decoded.id;
+  const user = await User.findById(_id);
+  console.log(
+    user.liked_post.find((post) => {
+      post == id;
+    })
+  );
+  if (user.liked_post.find((post) => post == id))
+    return res.redirect(`/posts/${id}`);
+
   try {
+    user.liked_post.push(id);
+    await user.save();
     const post = await Post.findById(id);
     post.like += 1;
     await post.save();

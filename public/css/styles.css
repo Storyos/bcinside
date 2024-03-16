@@ -22,6 +22,9 @@ footer {
   color: white;
   padding: 1rem;
   background-color: #3b488f;
+  position: relative;
+  bottom: 0;
+  width: 100%;
 }
 
 a {
