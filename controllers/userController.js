@@ -215,7 +215,7 @@ const mylikes = asyncHandler(async (req, res) => {
   const token = req.cookies.token;
   const decoded = jwt.verify(token, jwtSecret);
   const id = decoded.id;
-  const user = await User.findById(id);
+  const user = await User.findById(id).populate("liked_post");
   res.render("p_liked", { user: user });
 });
 
@@ -225,17 +225,17 @@ const myReplies = asyncHandler(async (req, res) => {
   const id = decoded.id;
   const comments = await Comment.find({ user: id });
 
-  const finedDataPromises = (comments.map(async comment=>{
+  const finedDataPromises = comments.map(async (comment) => {
     const thispost = await Post.findById(comment.post);
     const thistitle = thispost.title;
     comment.title = thistitle;
     return { ...comment.toObject(), title: thistitle };
-  }))
+  });
 
   // Promise.all로 모든 Promise가 끝날 때까지 기다린다.
   const finedData = await Promise.all(finedDataPromises);
 
-  console.log('finedData :>> ', finedData);
+  console.log("finedData :>> ", finedData);
   res.render("p_replied", { comments: finedData });
 });
 
