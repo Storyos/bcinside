@@ -11,7 +11,7 @@
         <a href="/posts/<%= post._id %>">
         <li class="posts_list_title"><%= post.title %> <span class="posts_list_comments">[<%= post.comments.length %>]</span></li>
         </a>
-        <li class="posts_list_user"><%= post.user.nickname%></li>
+        <li class="posts_list_user"><%= post.user.nickname %></li>
         <li class="posts_list_time"><%= formattedDate(post.createdAt) %></li>
       </ul>
     <% }); %>
