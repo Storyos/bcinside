@@ -217,6 +217,9 @@ const clickThumb = async (req, res) => {
   //추천
   const { id } = req.params;
   const token = req.cookies.token;
+  if (!token) {
+    return res.status(403).redirect(`/posts/${id}`);
+  }
   const decoded = jwt.verify(token, jwtSecret);
   const _id = decoded.id;
   const user = await User.findById(_id);
