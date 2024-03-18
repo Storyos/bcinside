@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
       nickname: nickname,
     });
     // 회원가입까지는 가능 --> 이후 처리 필요
-    res.status(201).json({ message: "등록성공", user });
+    res.redirect("/");
   }
 });
 
@@ -75,7 +75,7 @@ const deleteUser = asyncHandler(async (req, res) => {
     const decoded = jwt.verify(token, jwtSecret);
     const id = decoded.id;
     await User.findByIdAndDelete(id);
-    await Post.findByIdAndDelete(id);
+    await Post.deleteMany({user:id});
   } catch (err) {
     return res.status(401).json({ message: "토큰 오류" });
   }
