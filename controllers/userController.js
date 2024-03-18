@@ -64,7 +64,7 @@ const registerUser = asyncHandler(async (req, res) => {
       nickname: nickname,
     });
     // 회원가입까지는 가능 --> 이후 처리 필요
-    res.render("/");
+    res.redirect("/");
   }
 });
 
