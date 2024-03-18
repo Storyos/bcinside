@@ -1,22 +1,19 @@
 <%- include("./include/header") %>
-    <!-- <div class="header">
-    <div class="logo">Logo</div>
-    <ul class="menu">
-        <li>1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
-        <li>5</li>
-        <li><input type="search" placeholder="Search the community"></li>
-        <li><button>Login</button></li>
-        <li><button>Signin</button></li>
-    </ul>
-</div> -->
-
-    <form action="/users/login" method="post" class="login-form">
-        <input type="text" id="ID" name="ID" placeholder="ID" required />
-        <input type="password" id="password" name="password" placeholder="password" required />
-        <button type="submit">login</button>
-        <a href="./googleLogin"><img src="/images/googleLogin.png" alt="구글로그인"></a>
-    </form>
-    <%- include("./include/footer") %>
+<form action="/users/login" method="post" class="login-form">
+  <input type="text" id="ID" name="ID" placeholder="ID" required />
+  <input
+    type="password"
+    id="password"
+    name="password"
+    placeholder="password"
+    required
+  />
+  <button type="submit">login</button>
+  <% if(message){ %>
+  <span> <%= message %> </span>
+  <% } %>
+  <a href="./googleLogin"
+    ><img src="/images/googleLogin.png" alt="구글로그인"
+  /></a>
+</form>
+<%- include("./include/footer") %>

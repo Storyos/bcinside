@@ -12,7 +12,7 @@ const GOOGLE_CLIENT_ID =
 const axios = require("axios");
 
 const getLogin = (req, res) => {
-  res.render("login");
+  res.render("login", { message: "" });
 };
 
 // @desc Login User
@@ -23,11 +23,15 @@ const loginUser = asyncHandler(async (req, res) => {
   console.log("password :>> ", password);
   const user = await User.findOne({ username: ID });
   if (!user) {
-    return res.status(401).json({ message: "일치하는 사용자가 없습니다." });
+    return res
+      .status(401)
+      .render("login", { message: "일치하는 사용자가 없습니다." });
   }
   const isMatch = await bcrypt.compare(password, user.password);
   if (!isMatch) {
-    return res.status(401).json({ message: "비밀번호가 일치하지 않습니다." });
+    return res
+      .status(401)
+      .render("login", { message: "비밀번호가 일치하지 않습니다." });
   }
   const token = jwt.sign({ id: user.id }, jwtSecret);
   res.cookie("token", token, { httpOnly: true });
